@@ -1,3 +1,5 @@
+# La version de Joomla n’est plus affichée dans la balise meta generator
+
 Publication : 20 janvier 2013
 
 Depuis Joomla! 2.5, la version (ou plutôt la branche) n’est plus affichée dans la balise meta generator. Je n’ai pas trouvé d’annonce officielle sur ce point ; j’ai donc effectué quelques tests. La dernière version de Joomla! 1.7 (1.7.5) affiche la version mais Joomla! 2.5 (2.5.0) ne l’affiche pas.
