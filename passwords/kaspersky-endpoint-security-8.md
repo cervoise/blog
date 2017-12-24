@@ -1,3 +1,7 @@
+# Attaque sur le mot de passe utilisateur de Kaspersky Endpoint Security 8
+
+Publication : 27 février 2015
+
 Kaspersky Endpoint Security propose depuis un certain temps déjà, de restreindre certaines actions (désactivation de l’antivirus par exemple) via un mot de passe. De ce fait, les droits d’administration sur un poste ne permettent pas, en théorie, la maîtrise de l’antivirus.
 
 Il est possible d’envisager une attaque par dictionnaire en utilisant un script simulant des entrées claviers (avec AutoIt ou bien Java Robot) ou bien de faire ça avec un Arduino Uno ou une Teensy. Bien sûr, il faut prendre une capture d’écran/photo à chaque tentative et les comparer manuellement ou bien avec ImageMagick ce qui reste assez fastidieux. Cependant, si l’utilisateur dispose des droits d’administration il est possible de d’accéder au registre et de le modifier et donc d’écraser le mot de passe comme indiqué sur le site suivant : www.fixkb.com/2009/06/how-to-remove-kaspersky-passwords.html.
