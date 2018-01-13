@@ -2,6 +2,8 @@
 
 Publication : 4 octobre 2012
 
+Dans les news d’hier on a pu voir passer l’information suivante : [Sécurité WordPress : Détecter la version du CMS via un hash MD5 c’est possible !](http://www.undernews.fr/reseau-securite/securite-wordpress-detecter-la-version-du-cms-via-un-hash-md5-cest-possible.html) ça rappel d’ailleurs un ancien article sur [le blog sécurité d’OBS sur BlindElephant](http://blogs.orange-business.com/securite/2010/08/identifier-le-type-et-la-version-d-un-applicatif-web-avec-blindelephant.html).
+
 Un moyen envisageable de se protéger contre ce type d’outil consisterai à ajouter du sel dans les fichiers via une chaîne de caractères aléatoires en commentaire. Cela se script d’ailleurs assez bien, voici un exemple qui rajoute ce sel aux fichiers HTM/HTML, CSS et JS. Il suffit de rentrer l’adresse du répertoire racine de votre CMS sur votre disque et de lancer le script.
 
 ```python
