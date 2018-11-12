@@ -1,14 +1,20 @@
 # Slides (and more) from conferences
 
+If slides are not available they may be not public or I may have forgot to update this page.
+
 ## 2018
 
+- HackLU 2018 (16-17-18/10 : Luxembourg) : http://archive.hack.lu/2018/A_Cervoise-Backdoor_Bash_on_Windows.pdf
+- AfterWork OSSIR 09/2018 (Paris) : Will be uploaded here https://ossir.org/paris/supports/index/afterworks.shtml
+- PassTheSalt 2018 (2-3-4/07 : Lille) : https://passthesalt.ubicast.tv/videos/open-hardware-for-software-offensive-security/
 - (Rump) SSTIC 2018 (12-13-14/06 : Rennes) : https://static.sstic.org/rumps2018/2018-06-WebDev-WebShell_rump_sstic.pdf
+
 
 ## 2016
 
 - SSTIC 2016 (1-2-3/06 - Rennes) : https://www.sstic.org/2016/presentation/unlock_android/
 - BeeRump 2016 (16/06 - Paris) : http://www.rump.beer/2016/slides/Teensy_-_Introduire_une_porte_derobe_dans_un_peripherique_USB.pdf
-RMLL 2016 (4-5-6/07 - Paris) : https://sec2016.rmll.info/files/20160706-02-Cervoise-Security-for-DIY-projects.pdf
+- RMLL 2016 (4-5-6/07 - Paris) : https://sec2016.rmll.info/files/20160706-02-Cervoise-Security-for-DIY-projects.pdf
 
 ## 2015
 
