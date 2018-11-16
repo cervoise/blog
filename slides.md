@@ -5,7 +5,7 @@ If slides are not available they may be not public or I may have forgot to updat
 ## 2018
 
 - HackLU 2018 (16-17-18/10 : Luxembourg) : http://archive.hack.lu/2018/A_Cervoise-Backdoor_Bash_on_Windows.pdf
-- AfterWork OSSIR 09/2018 (Paris) : Will be uploaded here https://ossir.org/paris/supports/index/afterworks.shtml
+- AfterWork OSSIR 09/2018 (Paris) : Will be uploaded here https://ossir.org/paris/supports/index/afterworks.shtml, a list of project with electronics that can be found in the trash is available in dumpster-diving/fr-project-list.md
 - PassTheSalt 2018 (2-3-4/07 : Lille) : https://passthesalt.ubicast.tv/videos/open-hardware-for-software-offensive-security/
 - (Rump) SSTIC 2018 (12-13-14/06 : Rennes) : https://static.sstic.org/rumps2018/2018-06-WebDev-WebShell_rump_sstic.pdf
 
