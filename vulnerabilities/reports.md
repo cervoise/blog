@@ -10,3 +10,6 @@ Debian packages
   * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=942391
   * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=944979
   * https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=945092
+
+Applications:
+  * Robomongo: https://github.com/Studio3T/robomongo/issues/1685
