@@ -1,4 +1,4 @@
-# Note
+# Note
 
 This MD file has been created for the SecurityTube Linux Assembly Expert certification (https://www.pentesteracademy.com/course?id=3). Student ID: 14183.
 
