@@ -12,7 +12,7 @@ Reverse shell creation is simpler in a C point of view. First a socket is create
 
 The reverse shell starts and ends as the bind shell
 
-```
+```C
 int main()
 {
 	int my_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -30,7 +30,7 @@ int main()
 
 *Socket *usage is easy to understant using the manual
 
-```
+```C
 NAME
        connect - initiate a connection on a socket
 
@@ -45,12 +45,12 @@ SYNOPSIS
 Again a *sockaddr* structure must be created, the only change here is we are using our target IP address. In order to have an C formated IP address, *inet_addr *function is used.
 
 From the manual:
-```
+```C
 The inet_addr() function converts the Internet host address cp from IPv4 numbers-and-dots notation into binary data in network byte order.
 ```
 
 ### C Reverse Shell - Final code
-```
+```C
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
