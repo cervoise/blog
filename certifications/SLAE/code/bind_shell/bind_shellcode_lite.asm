@@ -22,7 +22,7 @@ _start:
 	xor eax, eax
 	push eax
 	push word 0x5c11
-	inc bl	
+	inc ebx	
 	push word bx
 	mov edx, esp
 
