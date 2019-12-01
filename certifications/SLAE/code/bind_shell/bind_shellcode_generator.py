@@ -33,7 +33,7 @@ _start:  \n \
 	xor eax, eax  \n \
 	push eax  \n \
 	push word *PORT*  \n \
-	inc bl	 \n  \
+	inc ebx	 \n  \
 	push word bx  \n \
 	mov edx, esp  \n \
  \n \
