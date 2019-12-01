@@ -559,7 +559,7 @@ callexecve:
 
 ### Compilation
 
-The compilation si done using *nasm*:
+Compilation is done using *nasm*:
 ```
 $ nasm -f elf32 -o bind_shellcode.o bind_shellcode.nasm
 ```
