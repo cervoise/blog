@@ -2,7 +2,7 @@
 
 This MD file has been created for the SecurityTube Linux Assembly Expert certification (https://www.pentesteracademy.com/course?id=3). Student ID: 14183.
 
-# Exo 2 - Reverse shellcode - Part 1 - C Bind Shell
+# Exo 1 - Bind shellcode - Part 1 - C Bind Shell
 
 ### *int main()*
 
