@@ -6,7 +6,7 @@ This MD file has been created for the SecurityTube Linux Assembly Expert certifi
 
 ### *int main()*
 
-For this first exercise lets start by developping a C bind shell. Steps are:
+For this first exercise let's start by developing a C bind shell. Steps are:
 
   * Create a socket
   * Bind the socket
@@ -52,7 +52,7 @@ int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
  addrlen specifies the size, in bytes, of the address structure pointed to by addr.
    * addr is a specific structure
 
-The sockaddr structure myst contain:
+The sockaddr structure must contain:
 
   * the family: *AF_INET*
   * the address to listen: *INADDR_ANY*
@@ -112,7 +112,7 @@ int my_accept = accept(my_socket, NULL, NULL);
 
 ### Redirect
 
-Before executing our shell we need to redirect stdin, stdout and stderr to our socket. Again, lets use the man.
+Before executing our shell we need to redirect stdin, stdout and stderr to our socket. Again, let's use the man.
 
 ```C
 #include <unistd.h>
@@ -133,7 +133,7 @@ dup2(my_accept, 1);
 dup2(my_accept, 2);
 ```
 
-Regarding C code, using a for loop do not have a huge interest, but as its for shellcoding purposes, lets use a for loop:
+Regarding C code, using a for loop do not have a huge interest, but as it's for shellcoding purposes, let's use a for loop:
 
 ```C
 int i;
@@ -157,7 +157,7 @@ execve("/bin/sh", NULL, NULL);
 ```
 ### Code
 
-Lets try to compile it by removing the includes one by one in order to remove unecessary include. Finally there is a C Bind Shell:
+Let's try to compile it by removing the includes one by one in order to remove unnecessary include. Finally, there is a C Bind Shell:
 
 ```C
 #include <sys/socket.h>
@@ -623,7 +623,7 @@ The shellcode size is 114, next step is to reduce it!
 # Exo 1 - Bind shellcode - Part 3 - Optimized Bind Shellcode
 
 
-In this part optimization is done to reduce the shellcode length. Only successfull tries are reported here.
+In this part optimisation is done to reduce the shellcode length. Only successful tries are reported here.
 
 ### Socket call
 
@@ -634,7 +634,7 @@ EBX is set to 0x1 (because of previous *mov bl, 1*), lets see if *push ebx* is s
 8048062:	53                   	push   ebx
 ```
 
-### Bind
+### Bind
 
 In the bind part there is a *mov bl, 0x2*. As EBX is already set to 0x1, lets see if inc is shorted:
 
@@ -742,7 +742,7 @@ Original code:
 
 Lentgth is 28.
 
-Now, lets try to put "/bin/sh" on the stack. As null byte must be avoid, the PATH is padded using "/". Here "/bin/sh" became "//bin/sh"
+Now, let's try to put "/bin/sh" on the stack. As null byte must be avoided, the PATH is padded using "/". Here "/bin/sh" became "//bin/sh"
 
 ```
    0:	b0 0b                	mov    al,0xb
@@ -895,7 +895,7 @@ Shellcode length was reduced of 15 bytes.
 
 # Exo 1 - Bind shellcode - Part 4 - Bind Shellcode Generator
 
-In this post, I will create Python 3 scripts for easilly generate shellcode by chosing the TCP port to listen on and the shell to run (in case of /bin/sh is not available). As both JMP CALL POP and pushing the path on the stack were used, two script will be done.
+In this post, I will create Python 3 scripts for easily generate shellcode by choosing the TCP port to listen on and the shell to run (in case of /bin/sh is not available). As both JMP CALL POP and pushing the path on the stack were used, two script will be done.
 
 ### Handle the port
 
@@ -915,7 +915,7 @@ else:
 
 ### Handle the path
 
-For the PATH pushed on the stack we have to add padding to avoid null byte by adding slashe(s).
+For the PATH pushed on the stack we have to add padding to avoid null byte by adding slash(es).
 
 ```python
 if (len(path) % 4) != 0:
