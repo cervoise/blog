@@ -315,7 +315,31 @@ For the first structure, values must be pushed on the stack:
 - 0x5c11
 - 0x2
 
-Size of the structure is 16 (0x10. As EAX is 8 bytes 0x5c11 and 0x2 must be pushed as word in order to have a structure of size 16.
+Size of the structure is 16 (0x10. As EAX is 8 bytes 0x5c11 and 0x2 must be pushed as word in order to have a structure of size 16. It is easy to check this using C code:
+
+```
+$ cat sizeof.c
+#include <sys/socket.h>
+#include <unistd.h>
+#include <netinet/in.h>
+
+int main()
+{
+	int my_socket = socket(AF_INET, SOCK_STREAM, 0);
+
+	struct sockaddr_in my_sockaddr;
+	my_sockaddr.sin_family = AF_INET;
+    	my_sockaddr.sin_addr.s_addr = INADDR_ANY;
+    	my_sockaddr.sin_port = htons(4454);
+	
+	printf("%i\n", sizeof(my_sockaddr));
+
+	return 0;
+}
+$ gcc sizeof.c -o sizeof
+$ ./sizeof 
+16
+```
 
 ```ASM
 xor eax, eax
