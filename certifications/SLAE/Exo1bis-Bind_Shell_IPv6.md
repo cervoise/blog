@@ -1,8 +1,8 @@
-### Note
+# Note
 
 This MD file has been created for the SecurityTube Linux Assembly Expert certification (https://www.pentesteracademy.com/course?id=3). Student ID: 1483.
 
-### IPv6
+# IPv6
 
 Lets try to change the code in order to listen on all IPv6 interfaces.
 
@@ -54,14 +54,14 @@ uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(
 exit
 ```
 
-### ASM
+# ASM
 
 Changes in the previous code are:
  * using a *sockaddr_in6* structure
  * using AF_INET6
  * using in6addr_any
 
-####  *sockaddr_in6* structure
+##  *sockaddr_in6* structure
 
 Using the manual, *sockaddr_in6* structure is easy to understand:
 
@@ -109,7 +109,7 @@ In IPv4 previous shellcode 0xa will be replace by 0x1c:
 push 0x1c ;previously push 0xa
 ```
 
-#### AF_INET6
+## AF_INET6
 
 AF_INET6 value is easy to find:
 ```
@@ -122,7 +122,7 @@ In IPv4 previous shellcode 0x2 will be replace by 0xa:
 push word 0xa ;previously push word bx
 ```
 
-#### *in6addr_any*
+## *in6addr_any*
 
 *in6addr_any* value is easy to find:
 
@@ -146,9 +146,7 @@ push 0x1c ;previously push 0xa
 Now for *in6addr_any*, lets find its value:
 
 
-
-
-#### Final shellcode
+## Final shellcode
 
 ```ASM
 global _start
@@ -234,7 +232,7 @@ duploop:
 	int 0x80
 ```
 
-#### Compilation
+## Compilation
 
 
 Lets compile everything:
