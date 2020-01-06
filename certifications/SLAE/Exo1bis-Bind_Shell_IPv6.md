@@ -4,9 +4,9 @@ This MD file has been created for the SecurityTube Linux Assembly Expert certifi
 
 # IPv6
 
-Lets try to change the code in order to listen on all IPv6 interfaces.
+Let's try to change the code in order to listen on all IPv6 interfaces.
 
-In order to better understant IPv6 structure, let's change the C code:
+In order to better understand IPv6 structure, let's change the C code:
 
 ```C
 #include <sys/socket.h>
@@ -76,7 +76,7 @@ Using the manual, *sockaddr_in6* structure is easy to understand:
            };
 ```
 
-Regarding the previsous shellcode, the length of *sin6_addr* is different (this will be handle later) and *sin6_flowinfo* must be pushed. This field was not used in the C code, lets fill it with null butes. A *uint32_t* variable has the size of a register, so a null register will be pushed.
+Regarding the previous shellcode, the length of *sin6_addr* is different (this will be handled later) and *sin6_flowinfo* must be pushed. This field was not used in the C code, let's fill it with null bytes. A *uint32_t* variable has the size of a register, so a null register will be pushed.
 
 The size of *sockaddr_in6* is easy to get using C code:
 ```
@@ -134,7 +134,7 @@ extern const struct in6_addr in6addr_any;        /* :: */
 
 We will need to push a null register four times.
 
-#### Shellcode change
+#### Shellcode change
 
 So in our previous code some changed are done:
 
@@ -143,7 +143,7 @@ push word 0xa ;previously push word bx
 push 0x1c ;previously push 0xa
 ```
 
-Now for *in6addr_any*, lets find its value:
+Now for *in6addr_any*, let's find its value:
 
 
 ## Final shellcode
@@ -235,7 +235,7 @@ duploop:
 ## Compilation
 
 
-Lets compile everything:
+Let's compile everything:
 
 ```
 $ bash compile.sh bind_shellcode_ipv6
@@ -259,4 +259,4 @@ uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(
 exit
 ```
 
-As for the IPv4 shellcode, a Python script could be done in order to automize the port configuration.
+As for the IPv4 shellcode, a Python script could be done in order to automate the port configuration.
