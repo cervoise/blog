@@ -134,18 +134,6 @@ extern const struct in6_addr in6addr_any;        /* :: */
 
 We will need to push a null register four times.
 
-#### Shellcode change
-
-So in our previous code some changed are done:
-
-```
-push word 0xa ;previously push word bx
-push 0x1c ;previously push 0xa
-```
-
-Now for *in6addr_any*, let's find its value:
-
-
 ## Final shellcode
 
 ```ASM
