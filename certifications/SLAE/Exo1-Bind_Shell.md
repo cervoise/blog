@@ -32,7 +32,7 @@ DESCRIPTION
  
         SOCK_STREAM     Provides sequenced, reliable, two-way, connection-based byte streams.  An out-of-band data transmission mechanism may be supported.
  
-        The  protocol  specifies  a  particular  protocol  to  be used with the socket.  Normally only a single protocol exists to support a particular socket  type within a given protocol family, in which case protocol can be specified as 0. 
+        The  protocol  specifies  the one  to  be used with the socket.  Normally only a single protocol exists to support a particular socket  type within a given protocol family, in which case protocol can be specified as 0. 
 ```
 
 Our C code is:
@@ -42,7 +42,7 @@ int my_socket = socket(AF_INET, SOCK_STREAM, 0);
 ```
 
 ### Bind
-Then socket must be bind. 
+Then socket must be bound. 
 
 ```C
 int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
@@ -74,7 +74,7 @@ bind(my_socket, (struct sockaddr *)&my_sockaddr, sizeof(my_sockaddr));
 ```
 ### Listen
 
-Lets start listening.
+Let's start listening.
 
 ```C
 SYNOPSIS
@@ -133,7 +133,7 @@ dup2(my_accept, 1);
 dup2(my_accept, 2);
 ```
 
-Regarding C code, using a for loop do not have a huge interest, but as it's for shellcoding purposes, let's use a for loop:
+Regarding C code, using a for loop does not have a huge interest, but as it's for shellcoding purposes, let's use a for loop:
 
 ```C
 int i;
@@ -143,7 +143,7 @@ for(i = 0; i < 3; i++)
 
 ### Execve
 
-At last we can finnaly call execve:
+At last we can finally call execve:
 ```C
 SYNOPSIS
        #include <unistd.h>
@@ -215,7 +215,7 @@ $ exit
 
 ### Socket
 
-There is no syscall for socket. But one exist for socketcall which allows to call socket functions.
+There is no syscall for socket. But one exists for socketcall which allows to call socket functions.
 
 ```
 $ grep socket /usr/include/i386-linux-gnu/asm/unistd_32.h
@@ -303,7 +303,7 @@ $ python3 -c "print(hex(4444))"
 0x115c
 ```
 
-We turn the value into little indian: *0x5c11*.
+We turn the value into little endian: *0x5c11*.
 
 ```
 $ for elmt in $(locate in.h); do grep INADDR_ANY $elmt; done
@@ -644,14 +644,14 @@ exit
 
 The shellcode size is 114, next step is to reduce it!
 
-# Exo 1 - Bind shellcode - Part 3 - Optimized Bind Shellcode
+# Exo 1 - Bind shellcode - Part 3 - Optimised Bind Shellcode
 
 
 In this part optimisation is done to reduce the shellcode length. Only successful tries are reported here.
 
 ### Socket call
 
-EBX is set to 0x1 (because of previous *mov bl, 1*), lets see if *push ebx* is shorter than *push 0x1*
+EBX is set to 0x1 (because of previous *mov bl, 1*), let's see if *push ebx* is shorter than *push 0x1*
 
 ```
 8048060:	6a 01                	push   0x1
@@ -660,7 +660,7 @@ EBX is set to 0x1 (because of previous *mov bl, 1*), lets see if *push ebx* is s
 
 ### Bind
 
-In the bind part there is a *mov bl, 0x2*. As EBX is already set to 0x1, lets see if inc is shorted:
+In the bind part there is a *mov bl, 0x2*. As EBX is already set to 0x1, let's see if inc is shorted:
 
 ```
 8048060:	b3 02                	mov    bl,0x2
@@ -721,7 +721,7 @@ Again, we put 0x5 in bl but bl is already set to 0x4. Inc is shorted
 
 At the end of the accept part, EAX is put in EBX. Few instructions later EAX is set to 0 because value in EAX cannot be predicted, and then AL is set to 0x3F.
 
-Lets check if we can exchange value (*xchg* instruction) between EAX and EBX. As EBX value is known, EAX will not need to be set to 0 before to put 0x3F in AL
+Let's check if we can exchange value (*xchg* instruction) between EAX and EBX. As EBX value is known, EAX will not need to be set to 0 before to put 0x3F in AL
 
 ```  
 8048060:	89 c3                	mov    ebx,eax
@@ -738,7 +738,7 @@ Because of the loop, ecx is set to -1. Lets check if *inc ecx* is not shorter th
 8048062:	41                   	inc    ecx
 ```
 
-Lets check if it is not possible to put the PATH of the executed program on the stack directly in order to reduce the size of the shellcode.
+Let's check if it is not possible to put the PATH of the executed program on the stack directly in order to reduce the size of the shellcode.
 
 Original code:
 
@@ -764,7 +764,7 @@ Original code:
   1b:	73 68                	jae    85 <callexecve+0x74>
 ```
 
-Lentgth is 28.
+Length is 28.
 
 Now, let's try to put "/bin/sh" on the stack. As null byte must be avoided, the PATH is padded using "/". Here "/bin/sh" became "//bin/sh"
 
@@ -779,7 +779,7 @@ Now, let's try to put "/bin/sh" on the stack. As null byte must be avoided, the 
   13:	cd 80                	int    0x80
 ```
 
-Length is 21 (with 1 byte for padding). The maximum will be 3 bytes of padding. Using this method redecue the length between 5 and 8 bytes.
+Length is 21 (with 1 byte for padding). The maximum will be 3 bytes of padding. Using this method it is possible to reduce the length between 5 and 8 bytes.
 
 Also, there is a *xor edx, edx* in the code. The *cdq* instruction will convert a double word to a quad word from EAX to EAX and EDX. If EAX is null, EDX will be set to null. *cdq* is only a one byte instruction.
 
@@ -793,7 +793,7 @@ Last improvement, the exit can be removed:
  8048064:	cd 80                	int    0x80
 ```
 
-### Optimized shellcode
+### Optimised shellcode
 
 ```ASM
 global _start
@@ -922,7 +922,7 @@ Shellcode length was reduced of 16 bytes.
 
 # Exo 1 - Bind shellcode - Part 4 - Bind Shellcode Generator
 
-In this post, I will create Python 3 scripts for easily generate shellcode by choosing the TCP port to listen on and the shell to run (in case of /bin/sh is not available). As both JMP CALL POP and pushing the path on the stack were used, two script will be done.
+In this post, I will create Python 3 scripts for easily generate shellcode by choosing the TCP port to listen on and the shell to run (in case of /bin/sh is not available). As both JMP CALL POP and pushing the path on the stack were used, two scripts will be done.
 
 ### Handle the port
 
@@ -950,7 +950,7 @@ if (len(path) % 4) != 0:
       path = "/" + path
 ```
 
-Then we have to split the string and revert it in order to repesct endianess.
+Then we have to split the string and revert it in order to respect endianess.
 
 
 ```python
