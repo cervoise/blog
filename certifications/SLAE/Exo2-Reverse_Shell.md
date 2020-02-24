@@ -137,7 +137,7 @@ Let's imagine the target is 10.0.0.1:
 - 0x01010101 is subtracted in the register
 - result is 10.0.0.1
 
-This is working very well except if the IP also contains 255 (0xFF) like 10.255.0.1 (Note that IP range 255.0.0.0/8 is restricted for specific cases). This tricks will be included in the python generator.
+This is working very well except if the IP also contains 255 (0xFF) like 10.255.0.1 (Note that IP range 255.0.0.0/8 is restricted for specific cases). This trick will be included in the python generator.
 
 For our test shellcode, 127.1.1.1 (0x0101017F) will be used.
 
