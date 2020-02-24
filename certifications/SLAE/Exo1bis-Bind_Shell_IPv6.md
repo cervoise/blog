@@ -116,7 +116,7 @@ AF_INET6 value is easy to find:
 $ for elmt in $(locate socket.h); do grep AF_INET6 $elmt; done
 #define AF_INET6	10	/* IP version 6			*/
 ```
-In IPv4 previous shellcode 0x2 will be replace by 0xa:
+In IPv4 previous shellcode 0x2 will be replaced by 0xa:
 
 ```
 push word 0xa ;previously push word bx
