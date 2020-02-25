@@ -4,9 +4,9 @@ This MD file has been created for the SecurityTube Linux Assembly Expert certifi
 
 # Ceasar encoder
 
-Before using *insertion encoder* technique, let's explain an encoder developed in order to :
+Before using *insertion encoder* technique, let's introduce another encoder developed in order to:
  * encode shellcode
- * try to avoid bad characters.
+ * trying to avoid bad characters.
  
  Caesar encryption scheme is used as a base. Wikipedia has a very good explanation of this cypher: https://en.wikipedia.org/wiki/Caesar_cipher.
  
@@ -17,7 +17,6 @@ Before using *insertion encoder* technique, let's explain an encoder developed i
  ```python
  #!/usr/bin/python3
 # Python Cesar Encoder 
-
 
 ##Cesar encoder/decoced
 
@@ -84,8 +83,8 @@ Next step will be to try every possible key in order to find a encoded shellcode
 The script also check if the forbidden chars are present in the decoder stub.
 
 ```python
- #!/usr/bin/python3
- #Python Cesar Encoder 
+#!/usr/bin/python3
+#Python Cesar Encoder 
 
 import sys
 
@@ -158,7 +157,6 @@ for i in range(1, 0xFF):
 
    if len(encoded) == len(shellcode) * 4:
       break
-
 
 shellcode_decoder = shellcode_decoder.replace("%SIZE%",  str(len(shellcode)))
 shellcode_decoder = shellcode_decoder.replace("%ENCODED%", encoded2[:-1])
