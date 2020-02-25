@@ -23,7 +23,6 @@ _start:
 	;bind
 	xor eax, eax
 	push eax
-	;push 0x5c11
 	push word 0x5c11	
 	push word 0x2
 	mov edx, esp
