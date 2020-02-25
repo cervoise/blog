@@ -4,7 +4,7 @@ This MD file has been created for the SecurityTube Linux Assembly Expert certifi
 
 # Get execve shellcode
 
-Just to get sure, lets compile the execve-stack shellcode and extract it:
+Just to get sure, let's compile the execve-stack shellcode and extract it:
 
 ```
 cervoise@slae:~$ bash compile.sh execve-stack
@@ -131,7 +131,7 @@ uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(
 $ exit
 ```
 
-Lets compile the all things into an ELF using PyInstaller:
+Let's compile the all things into an ELF using PyInstaller:
 
 ```
 cervoise@slae:~$ python pyinstaller.py --onefile ../decrypt-and-run.py 
@@ -214,7 +214,7 @@ static void phex(uint8_t* str)
     printf("\n");
 }
 ```
-Some compilation trick can be set in order to reduce the size of the lib:
+Compilation tricks can be set in order to reduce the size of the lib:
 
 ```
 $ gcc -o aes.o aes.c -Wall -Os -c -DCBC=0 -DCTR=1 -DECB=1
@@ -466,4 +466,4 @@ Another way could  be investigated but this could increase the size of the shell
 
 # Alternatives
 
-RC4 or XTEA  are easy algorithms to code in assembly, some examples can be found https://github.com/aelfimow/rc4-asm or https://tinycrypt.wordpress.com/2018/01/24/xtea-block-cipher/.
+RC4 or XTEA  are easy algorithms to code in assembly, examples can be found https://github.com/aelfimow/rc4-asm or https://tinycrypt.wordpress.com/2018/01/24/xtea-block-cipher/.
