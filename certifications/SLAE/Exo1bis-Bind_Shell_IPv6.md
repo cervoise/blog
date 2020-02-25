@@ -59,7 +59,7 @@ exit
 Changes in the previous code are:
  * using a *sockaddr_in6* structure
  * using AF_INET6
- * using in6addr_any
+ * using *in6addr_any*
 
 ##  *sockaddr_in6* structure
 
@@ -79,7 +79,7 @@ Using the manual, *sockaddr_in6* structure is easy to understand:
 Regarding the previous shellcode, the length of *sin6_addr* is different (this will be handled later) and *sin6_flowinfo* must be pushed. This field was not used in the C code, let's fill it with null bytes. A *uint32_t* variable has the size of a register, so a null register will be pushed.
 
 The size of *sockaddr_in6* is easy to get using C code:
-```
+```C
 $ cat sizeof.c
 #include <sys/socket.h>
 #include <unistd.h>
