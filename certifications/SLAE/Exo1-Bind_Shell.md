@@ -236,7 +236,7 @@ In order to call socket:
 - EBX will contain SYS_SOCKET
 - EXC will contain the args : (AF_INET, SOCK_STREAM, 0)
 
-Lets gets hex values of all these variables:
+Let's gets hex values of all these variables:
 
 ```
 $ python3 -c "print(hex(102))"
@@ -275,7 +275,7 @@ push 2
 mov ecx, esp
 ```
 
-After the syscall returns, EAX will contain a reference to the socket, lets put it in EDI.
+After the syscall returns, EAX will contain a reference to the socket, let's put it in EDI.
 ```ASM
 mov edi, eax
 ```
@@ -293,7 +293,7 @@ $ for elmt in $(locate net.h); do grep SYS_BIND $elmt; done
 
 As we have two structures (ECX and my_sockaddr), my_sockaddr needs to be pushed on the stack, saved in a register and then *bind* arguments must be pushed on the stack and put in ECX.
 
-Lets get the value of *my_sockaddr* structure.
+Let's get the value of *my_sockaddr* structure.
 
 ```
 $ python3 -c "print(hex(4444))"
@@ -733,7 +733,7 @@ Let's check if we can exchange value (*xchg* instruction) between EAX and EBX. A
 
 ## Excevec
 
-Because of the loop, ecx is set to -1. Lets check if *inc ecx* is not shorter than *xor ecx,ecx*
+Because of the loop, ecx is set to -1. Let's check if *inc ecx* is not shorter than *xor ecx,ecx*
 
 ```ASM
 8048060:	31 c9                	xor    ecx,ecx
