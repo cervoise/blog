@@ -165,7 +165,7 @@ duploop:
 
 ## Compilation
 
-Lets compile everything:
+Let's compile everything:
 
 ```
 $ bash compile.sh reverse_shellcode_ipv6
