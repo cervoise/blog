@@ -63,7 +63,7 @@ _start:
     int 0x80
 ```
 
-# Exo 0 - Execve shellcode - Part 1 - Execve generator
+# Exo 0 - Execve shellcode - Part 1 - Execve generator
 
 A very simple Python 3 program can be done for generating a execve shellcode with a specific program:
 
@@ -116,11 +116,11 @@ shellcode = shellcode.replace("*PATH*", pushed_value)
 print(shellcode)
 ```
 
-# Exo 0 - Execve shellcode - Part 1 - Execve with arguments
+# Exo 0 - Execve shellcode - Part 1 - Execve with arguments
 
-## C program
+## C program
 
-It may userfull to pass argument to a program. For example /bin/bash, does not run as root if the program is SUID root. It is possible to run /bin/sh which is in most case /bin/dash. But on some distribution /bin/sh is just a link to /bin/bash.
+It may be useful to pass argument to a program. For example, /bin/bash, does not run as root if the program is SUID root. It is possible to run /bin/sh which is in most cases /bin/dash. But on some distribution /bin/sh is just a link to /bin/bash.
 
 Let's check this with a very small C program:
 
@@ -165,7 +165,7 @@ bash-4.2# id
 uid=1000(cervoise) gid=1000(cervoise) euid=0(root) groups=0(root),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare),1000(cervoise)
 ```
 
-## Assembly program
+## Assembly program
 
 The only difference here is to create a structure that contains:
  * /bin/bash\0
