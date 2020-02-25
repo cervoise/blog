@@ -125,7 +125,7 @@ run()
 ```
 
 ```
-$ python decrypt-and-run.py 
+cervoise@slae:~$ python decrypt-and-run.py 
 $ id
 uid=1000(cervoise) gid=1000(cervoise) groups=1000(cervoise),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)
 $ exit
