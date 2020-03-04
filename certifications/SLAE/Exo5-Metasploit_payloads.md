@@ -178,7 +178,7 @@ This shellcode is pretty simple,
 Then chmod is called: int chmod(const char *pathname, mode_t mode);
 
 At the end, the exit syscall is called.
-```
+```ASM
  push 0x1 ; exit
  pop eax
  int 0x80
@@ -552,7 +552,7 @@ exit
 
 ## Analysis
 
-Let's analyse this deeper. Wireshark is running on the attacker system in order to intercept all the trafic. Using gbd we can easily view that */bin/dash* is started in a new process.
+Let's analyse this deeper. Wireshark is running on the attacker system in order to intercept all the trafic. Using gdb we can easily view that */bin/dash* is started in a new process.
 
 ```
 $ gdb -q ./staged-shellcode
