@@ -294,7 +294,7 @@ Disassembly of section .init:
 
 # Old encryption
 
-An easiest way to do encryption is using old cryptography like Vigenere like algorythm.
+An easiest way to do encryption is using old cryptography like Vigenere algorithm.
 
 ## Crypter
 
