@@ -8,9 +8,9 @@ Web applications
   * [06-2012] Logz: http://www.logz.org/index.php?art=487 [Fixed]
   * [09-2012] Joomla: https://www.securityfocus.com/bid/55818/info [Fixed]
   * [09-2012] Netcraft Toolbar: https://github.com/cervoise/blog/blob/master/web/about-xss-filter.md [Fixed]
-  * [05-2013] Events Manager plugin for Wordpress: https://www.securityfocus.com/bid/60078 [Fixed]
+  * [05-2013] Events Manager plugin for Wordpress: https://wpvulndb.com/vulnerabilities/6652 [Fixed]
   * [06-2013] WP Photo Album Plus plugin for Wordpress: http://moutane.net/RMLL2014/day_3-1150-Antoine_Cervoise-Race_condition_in_WordPress_plugin_allows_php_remote_code_execution.pdf [Fixed]
-  * [09-2013] Captcha plugin for Wordpress: https://github.com/cervoise/blog/blob/master/web/cms/wordpress/bypass-wordpress-captcha-plugin.md [Fixed before report]
+  * [09-2013] Captcha plugin for Wordpress: https://wpvulndb.com/vulnerabilities/7175 [Fixed before report]
   * [06-2016] BrewPi: https://github.com/BrewPi/brewpi-www/issues/62 [Fixed]
   * [01-2020] Dotclear: https://git.dotclear.org/dev/dotclear/issues/11 - https://dotclear.org/blog/post/2020/03/13/Dotclear-2.16 [Fixed]
   
