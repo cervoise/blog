@@ -1,6 +1,8 @@
 Here a list of some report I did:
 
 Web applications
+  * [02-2011] Guppy: https://freeguppy.org/fgy5ne.php?lng=fr&pg=0&id=92#z2
+  * [05-2012] Guppy: https://www.freeguppy.org/fgy5ne.php?lng=en&pg=0&id=69 [Fixed]
   * [06-2012] Logz: http://www.logz.org/index.php?art=487 [Fixed]
   * [09-2012] Joomla: https://www.securityfocus.com/bid/55818/info [Fixed]
   * SPIP: https://blog.spip.net/SPIP-1-9-2o-2-0-18-et-2-1-13-disponibles.htm [Fixed]
