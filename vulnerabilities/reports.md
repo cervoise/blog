@@ -1,8 +1,8 @@
 Here a list of some report I did:
 
 Web applications
-  * [02-2011] Guppy: https://freeguppy.org/fgy5ne.php?lng=fr&pg=0&id=92#z2
-  * [07-2011] phpMyAddressBook: Cross-site scripting (XSS) vulnerabilities allows remote attackers to inject persistent arbitrary web script or HTML via all contact field whenever a contact is created or modified in front-end or with CSV import function.
+  * [02-2011] Guppy: https://freeguppy.org/fgy5ne.php?lng=fr&pg=0&id=92#z2 [Fixed]
+  * [07-2011] phpMyAddressBook: Cross-site scripting (XSS) vulnerabilities allows remote attackers to inject persistent arbitrary web script or HTML via all contact field whenever a contact is created or modified in front-end or with CSV import function. [Fixed]
   * [04-2012] SPIP: https://blog.spip.net/SPIP-1-9-2o-2-0-18-et-2-1-13-disponibles.html [Fixed]
   * [05-2012] Guppy: https://www.freeguppy.org/fgy5ne.php?lng=en&pg=0&id=69 [Fixed]
   * [06-2012] Logz: http://www.logz.org/index.php?art=487 [Fixed]
