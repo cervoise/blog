@@ -1,4 +1,4 @@
-Here a list of some report I did:
+Here a list of report I did:
 
 Web applications
   * [02-2011] Guppy: https://freeguppy.org/fgy5ne.php?lng=fr&pg=0&id=92#z2 [Fixed]
