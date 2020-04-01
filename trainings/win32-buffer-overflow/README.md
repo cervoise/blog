@@ -5,6 +5,8 @@ I recommend to start with these online ressources:
  * corelan: https://www.corelan.be/index.php/category/security/exploit-writing-tutorials/)
  * Windows shellcoding: http://www.vividmachines.com/shellcode/shellcode.html#ws
 
+I dit not crawl all possibilty of exploit-db, same program may be vulnerable in different way. I can refer to the same exploit for different cases.
+
 ## Notes
 
 For "old" systems, you may have trouble to find old tools:
@@ -29,6 +31,11 @@ For "old" systems, you may have trouble to find old tools:
 ### Small space - Write your shellcode
 
  * https://www.exploit-db.com/exploits/558 (Windows 2000 Pro RC2 FR)
+ * https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
+
+### Small space - Egghunter
+
+ * https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR) 
 
 ## Tricky Win32 stack based buffer overflow
 
