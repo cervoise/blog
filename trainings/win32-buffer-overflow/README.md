@@ -24,7 +24,6 @@ For "old" systems, you may have trouble to find old tools:
  * https://www.exploit-db.com/exploits/616 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/3570 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/1787 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/1906 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/10374 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
 
