@@ -3,6 +3,16 @@ If you want to prepare yourself to a buffer overflow training (or certifications
 I recommend to start with these online ressources: 
  * fuzzysecurity: https://www.fuzzysecurity.com/tutorials.html
  * corelan: https://www.corelan.be/index.php/category/security/exploit-writing-tutorials/)
+ * Windows shellcoding: http://www.vividmachines.com/shellcode/shellcode.html#ws
+
+## Notes
+
+For "old" systems, you may have trouble to find old tools:
+ * OllyDbg200 (http://www.ollydbg.de/) is working on Windows 2000
+ * arwin
+   * can be compiled using *i686-w64-mingw32-gcc* on Linux
+   * is not working on Windows 2000 (but you can check your DLL on another sytem)
+  * WinDbg for Windows XP is available on the Waybackmachine: http://web.archive.org/web/20130118182453/https://msdl.microsoft.com/download/symbols/debuggers/dbg_x86_6.11.1.404.msi
 
 ## Simple Win32 stack based buffer overflow
 
