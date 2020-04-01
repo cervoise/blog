@@ -1,7 +1,7 @@
 #!/usr/bin/python2
 
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/45289
-# Exploit tested on Windows 2000 XP Pro SP3 FR
+# Exploit tested on Windows XP Pro SP3 FR
 
 file = open("exploit-R.txt", "wb")
 
