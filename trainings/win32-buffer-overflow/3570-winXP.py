@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+# WarFTP 1.65
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/3570
 # Exploit tested on Windows XP Pro SP3 FR
 
