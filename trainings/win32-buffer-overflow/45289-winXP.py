@@ -1,5 +1,6 @@
 #!/usr/bin/python2
 
+# R 3.4.4
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/45289
 # Exploit tested on Windows XP Pro SP3 FR
 
