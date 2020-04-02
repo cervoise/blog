@@ -31,6 +31,7 @@ For "old" systems, you may have trouble to find old tools:
 
  * https://www.exploit-db.com/exploits/558 (Windows 2000 Pro RC2 FR)
  * https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
+ * https://www.exploit-db.com/exploits/112 (Windows XP Pro SP3 FR)
 
 ### Small space - Egghunter
 
@@ -38,7 +39,7 @@ For "old" systems, you may have trouble to find old tools:
 
 ## Tricky Win32 stack based buffer overflow
 
- * MS07-017 on Internet Explorer for Windows XP (you can find a vulnerable IE version on Windows XP SP1)
+ * MS07-017 on Internet Explorer for Windows XP (you can find a vulnerable IE version on Windows XP NO SP/SP1/SP2)
 
 ## Win32 Stack based buffer overflow with SEH
 
