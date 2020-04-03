@@ -30,6 +30,8 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/11465 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/2873  (Windows XP Pro SP3 FR)
+ * https://www.exploit-db.com/exploits/2824  (Windows XP Pro SP3 FR)
+   * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/2815 - https://www.exploit-db.com/exploits/2821
 
 ### Small space - Write your shellcode
 
