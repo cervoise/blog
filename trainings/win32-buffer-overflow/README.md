@@ -16,6 +16,8 @@ For "old" systems, you may have trouble to find old tools:
    * is not working on Windows 2000 (but you can check your DLL on another sytem)
   * WinDbg for Windows XP is available on the Waybackmachine: http://web.archive.org/web/20130118182453/https://msdl.microsoft.com/download/symbols/debuggers/dbg_x86_6.11.1.404.msi
 
+These exercices are also a good opportunity to test Metasploit payloads ;)
+
 ## Simple Win32 stack based buffer overflow
 
 ### Simple JMP ESP
@@ -27,6 +29,7 @@ For "old" systems, you may have trouble to find old tools:
  * https://www.exploit-db.com/exploits/10374 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
  * https://www.exploit-db.com/exploits/11465 (Windows XP Pro SP3 FR)
+ * https://www.exploit-db.com/exploits/2873  (Windows XP Pro SP3 FR)
 
 ### Small space - Write your shellcode
 
