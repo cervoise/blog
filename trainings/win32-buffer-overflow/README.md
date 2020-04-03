@@ -13,7 +13,7 @@ For "old" systems, you may have trouble to find old tools:
  * OllyDbg200 (http://www.ollydbg.de/) is working on Windows 2000
  * arwin
    * can be compiled using *i686-w64-mingw32-gcc* on Linux
-   * is not working on Windows 2000 (but you can check your DLL on another sytem)
+   * is not working on Windows 2000 (but you can check your DLL on another system)
   * WinDbg for Windows XP is available on the Waybackmachine: http://web.archive.org/web/20130118182453/https://msdl.microsoft.com/download/symbols/debuggers/dbg_x86_6.11.1.404.msi
 
 These exercices are also a good opportunity to test Metasploit payloads ;)
