@@ -46,7 +46,10 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 
 ## Tricky Win32 stack based buffer overflow
 
- * MS07-017 on Internet Explorer for Windows XP (you can find a vulnerable IE version on Windows XP NO SP/SP1/SP2)
+ * MS07-017 on Internet Explorer for Windows XP - https://www.exploit-db.com/exploits/16526
+   * You can find a vulnerable IE version on Windows XP NO SP/SP1/SP2
+ * MS00-005 - https://www.exploit-db.com/exploits/19633
+   * You can find a vulnerable WordPad on Windows 98 SE
 
 ## Win32 Stack based buffer overflow with SEH
 
