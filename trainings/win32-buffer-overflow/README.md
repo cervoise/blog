@@ -11,6 +11,7 @@ I dit not crawl all possibilty of exploit-db, same program may be vulnerable in 
 
 For "old" systems, you may have trouble to find old tools:
  * OllyDbg200 (http://www.ollydbg.de/) is working on Windows 2000
+ * OllyDbg110 (http://www.ollydbg.de/) is working on Windows 98 SE
  * arwin
    * can be compiled using *i686-w64-mingw32-gcc* on Linux
    * is not working on Windows 2000 (but you can check your DLL on another system)
