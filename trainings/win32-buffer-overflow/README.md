@@ -59,6 +59,8 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
  
  ## Win32 Stack based buffer overflow - ASLR bypass
- 
+ ### Non-ASLR enabled module
+  * https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN)
+ ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
     * You can find a vulnerable IE version on Windows Vista NO SP
