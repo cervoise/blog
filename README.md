@@ -3,7 +3,7 @@ Blog posts, CTF write-up, etc.
 
 ## Conferences
 
-If you need to find any ressource of something I did present in a conference: [conferences](slides.md)
+If you need to find any ressource of something I did present in conferences: [conferences](slides.md)
 
 ## Blog posts
 
