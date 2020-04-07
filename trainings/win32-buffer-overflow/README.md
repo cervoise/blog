@@ -23,29 +23,30 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 
 ### Simple JMP ESP
 
- * https://www.exploit-db.com/exploits/26889 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/616   (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/3570  (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/1787  (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/10374 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/11465 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/2873  (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/2824  (Windows XP Pro SP3 FR)
+ * BlazeDVD Pro Player 6.1 - https://www.exploit-db.com/exploits/26889 (Windows XP Pro SP3 FR)
+ * MiniShare 1.4.1 - https://www.exploit-db.com/exploits/616   (Windows XP Pro SP3 FR)
+ * WarFTP 1.65 - https://www.exploit-db.com/exploits/3570  (Windows XP Pro SP3 FR)
+ * freeSSHd 1.0.9 - https://www.exploit-db.com/exploits/1787  (Windows XP Pro SP3 FR)
+ * Easy RM to MP3 Converter 2.7.3.700 - https://www.exploit-db.com/exploits/10374 (Windows XP Pro SP3 FR)
+ * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
+   * Simila vulnerability in the same program: https://www.exploit-db.com/exploits/17539
+ * Ollydbg 2.00 Beta1 - https://www.exploit-db.com/exploits/11465 (Windows XP Pro SP3 FR)
+ * AtomixMP3 < 2.3 - https://www.exploit-db.com/exploits/2873  (Windows XP Pro SP3 FR)
+ * XMPlay 3.3.0.4- https://www.exploit-db.com/exploits/2824  (Windows XP Pro SP3 FR)
    * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/2815 - https://www.exploit-db.com/exploits/2821
- * https://www.exploit-db.com/exploits/1906  (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/22932 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/14720 (Windows XP Pro SP3 FR)
+ * CesarFTP 0.99g - https://www.exploit-db.com/exploits/1906  (Windows XP Pro SP3 FR)
+ * Aviosoft Digital TV Player Professional 1.x - https://www.exploit-db.com/exploits/22932 (Windows XP Pro SP3 FR)
+ * MicroP 0.1.1.1600 - https://www.exploit-db.com/exploits/14720 (Windows XP Pro SP3 FR)
 
 ### Small space - Write your shellcode
 
- * https://www.exploit-db.com/exploits/558   (Windows 2000 Pro RC2 FR)
- * https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/112   (Windows XP Pro SP3 FR)
+ * WinRAR 1.0 - https://www.exploit-db.com/exploits/558   (Windows 2000 Pro RC2 FR)
+ * Kolibri Web Server 2.0 - https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
+ * mIRC 6.1 - https://www.exploit-db.com/exploits/112   (Windows XP Pro SP3 FR)
 
 ### Small space - Egghunter
 
- * https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR) 
+ * Kolibri Web Server 2.0 - https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR) 
 
 ## Tricky Win32 stack based buffer overflow
 
@@ -56,14 +57,14 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 
 ## Win32 Stack based buffer overflow with SEH
 
- * https://www.exploit-db.com/exploits/17788 (Windows XP Pro SP3 FR)
- * https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
+ * DVD X Player 5.5 Pro - https://www.exploit-db.com/exploits/17788 (Windows XP Pro SP3 FR)
+ * R 3.4.4 - https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
  
  ## Win32 Stack based buffer overflow - ASLR bypass
  ### Non-ASLR enabled module (JMP ESP)
-  * https://www.exploit-db.com/exploits/45406 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
+  * Socusoft Photo to Video Converter 8.07 - https://www.exploit-db.com/exploits/45406 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
  ### Non-ASLR enabled module with SEH
-  * https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
+  * Boxoft WAV to MP3 Converter 1.1 - https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
  ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
     * You can find a vulnerable IE version on Windows Vista NO SP
