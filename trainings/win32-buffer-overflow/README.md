@@ -5,7 +5,7 @@ I recommend to start with these online ressources:
  * corelan: https://www.corelan.be/index.php/category/security/exploit-writing-tutorials/)
  * Windows shellcoding: http://www.vividmachines.com/shellcode/shellcode.html#ws
 
-I dit not crawl all possibilty of exploit-db, same program may be vulnerable in different way. I can refer to the same exploit for different cases.
+I dit not crawl all possibilty of https://www.exploit-db.com, same program may be vulnerable in different way. I can refer to the same exploit for different cases.
 
 ## Notes
 
