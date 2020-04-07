@@ -5,7 +5,7 @@ I recommend to start with these online ressources:
  * corelan: https://www.corelan.be/index.php/category/security/exploit-writing-tutorials/)
  * Windows shellcoding: http://www.vividmachines.com/shellcode/shellcode.html#ws
 
-I dit not crawl all possibilty of https://www.exploit-db.com, same program may be vulnerable in different way. I can refer to the same exploit for different cases.
+I dit not crawl all possibilty of https://www.exploit-db.com, same program may be vulnerable in different ways. I can refer to the same exploit for different cases.
 
 ## Notes
 
@@ -46,7 +46,10 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 
 ### Small space - Egghunter
 
- * Kolibri Web Server 2.0 - https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR) 
+ * Kolibri Web Server 2.0 - https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
+ * Winamp 5.12 - https://www.exploit-db.com/exploits/3422
+   * Two other version of this exploit are available: https://www.exploit-db.com/exploits/1458 and https://www.exploit-db.com/exploits/1460
+   * This software is vulnerable to the same injection for another file type: https://www.exploit-db.com/exploits/26245
 
 ## Tricky Win32 stack based buffer overflow
 
