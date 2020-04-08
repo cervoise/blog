@@ -48,6 +48,7 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 
  * Kolibri Web Server 2.0 - https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
  * Winamp 5.12 - https://www.exploit-db.com/exploits/3422
+   * This one is tricky and have small space, you can use a short homemade shellcode, play with ESP and find more space or use an egghunter.
    * Two other version of this exploit are available: https://www.exploit-db.com/exploits/1458 and https://www.exploit-db.com/exploits/1460
    * This software is vulnerable to the same injection for another file type: https://www.exploit-db.com/exploits/26245
 
@@ -57,7 +58,11 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
    * You can find a vulnerable IE version on Windows XP NO SP/SP1/SP2
  * MS00-005 - https://www.exploit-db.com/exploits/19633
    * You can find a vulnerable WordPad on Windows 98 SE
-
+ * Winamp 5.12 - https://www.exploit-db.com/exploits/3422 
+   * This one is tricky and have small space, you can use a short homemade shellcode, play with ESP and find more space or use an egghunter.
+   * Two other version of this exploit are available: https://www.exploit-db.com/exploits/1458 and https://www.exploit-db.com/exploits/1460
+   * This software is vulnerable to the same injection for another file type: https://www.exploit-db.com/exploits/26245
+   
 ## Win32 Stack based buffer overflow with SEH
 
  * DVD X Player 5.5 Pro - https://www.exploit-db.com/exploits/17788 (Windows XP Pro SP3 FR)
