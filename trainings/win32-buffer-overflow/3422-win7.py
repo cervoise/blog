@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 # Winamp 5.12
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/3422
