@@ -48,10 +48,10 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 
  * Kolibri Web Server 2.0 - https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
  * Winamp 5.12 - https://www.exploit-db.com/exploits/3422
-   * This one is tricky and have small space:
-      * you can use a short homemade shellcode (Windows XP Pro SP3 FR),
-      * play with ESP to find more space (Windows XP Pro SP3 FR)
-      * or use an egghunter.
+   * This one is tricky and have small space you can:
+      * use a short homemade shellcode (Windows XP Pro SP3 FR),
+      * play with ESP to find more space (Windows XP Pro SP3 FR / Windows 7 Pro SP1 EN)
+      * or use an egghunter (Windows XP Pro SP3 FR).
    * Two other version of this exploit are available: https://www.exploit-db.com/exploits/1458 and https://www.exploit-db.com/exploits/1460
    * This software is vulnerable to the same injection for another file type: https://www.exploit-db.com/exploits/26245
 
@@ -62,10 +62,10 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * MS00-005 - https://www.exploit-db.com/exploits/19633
    * You can find a vulnerable WordPad on Windows 98 SE
  * Winamp 5.12 - https://www.exploit-db.com/exploits/3422 
-   * This one is tricky and have small space:
-      * you can use a short homemade shellcode (Windows XP Pro SP3 FR),
-      * play with ESP to find more space (Windows XP Pro SP3 FR)
-      * or use an egghunter.
+   * This one is tricky and have small space you can:
+      * use a short homemade shellcode (Windows XP Pro SP3 FR),
+      * play with ESP to find more space (Windows XP Pro SP3 FR / Windows 7 Pro SP1 EN)
+      * or use an egghunter (Windows XP Pro SP3 FR).
    * Two other version of this exploit are available: https://www.exploit-db.com/exploits/1458 and https://www.exploit-db.com/exploits/1460
    * This software is vulnerable to the same injection for another file type: https://www.exploit-db.com/exploits/26245
    
@@ -77,8 +77,12 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  ## Win32 Stack based buffer overflow - ASLR bypass
  ### Non-ASLR enabled module (JMP ESP)
   * Socusoft Photo to Video Converter 8.07 - https://www.exploit-db.com/exploits/45406 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
+  #### Tricky
+   * Winamp 5.12 - https://www.exploit-db.com/exploits/3422 
+   * This one is tricky and have small space you can:
+      * play with ESP to find more space (Windows XP Pro SP3 FR (no ASLR) / Windows 7 Pro SP1 EN).
  ### Non-ASLR enabled module with SEH
-  * Boxoft WAV to MP3 Converter 1.1 - https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
+  * Boxoft WAV to MP3 Converter 1.1 - https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
  ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
     * You can find a vulnerable IE version on Windows Vista NO SP
