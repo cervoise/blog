@@ -5,7 +5,9 @@ I recommend to start with these online ressources:
  * corelan: https://www.corelan.be/index.php/category/security/exploit-writing-tutorials/)
  * Windows shellcoding: http://www.vividmachines.com/shellcode/shellcode.html#ws
 
-I dit not crawl all possibilty of https://www.exploit-db.com, same program may be vulnerable in different ways. I can refer to the same exploit for different cases.
+I did not crawl all possibilty of https://www.exploit-db.com, same program may be vulnerable in different ways. I can refer to the same exploit for different cases.
+
+I do not consider that the Windows firewall is a security feature to be bypass for these exercices (but I may tell in the exploit file if it is possible to bypass it). I'm only focussing on exploitation prevention feature.  
 
 ## Notes
 
@@ -24,19 +26,27 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 ### Simple JMP ESP
 
  * BlazeDVD Pro Player 6.1 - https://www.exploit-db.com/exploits/26889 (Windows XP Pro SP3 FR)
+   * There is a tutorial for exploiting this software in the [Exploiting Simple Buffer Overflows on Win32](https://www.pentesteracademy.com/course?id=13) (not free).
  * MiniShare 1.4.1 - https://www.exploit-db.com/exploits/616   (Windows XP Pro SP3 FR)
+   * There is a tutorial for exploiting this software in the [Exploiting Simple Buffer Overflows on Win32](https://www.pentesteracademy.com/course?id=13) (not free).
  * WarFTP 1.65 - https://www.exploit-db.com/exploits/3570  (Windows XP Pro SP3 FR)
+   * There is a tutorial for exploiting this software in the [Exploiting Simple Buffer Overflows on Win32](https://www.pentesteracademy.com/course?id=13) (not free).
  * freeSSHd 1.0.9 - https://www.exploit-db.com/exploits/1787  (Windows XP Pro SP3 FR)
+   * There is a tutorial for exploiting this software in the [Exploiting Simple Buffer Overflows on Win32](https://www.pentesteracademy.com/course?id=13) (not free).
  * Easy RM to MP3 Converter 2.7.3.700 - https://www.exploit-db.com/exploits/10374 (Windows XP Pro SP3 FR)
  * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
-   * Simila vulnerability in the same program: https://www.exploit-db.com/exploits/17539
+   * Similar vulnerability in the same program: https://www.exploit-db.com/exploits/17539
+   * DEP bypass exists: https://www.exploit-db.com/exploits/17886
+   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html).
  * Ollydbg 2.00 Beta1 - https://www.exploit-db.com/exploits/11465 (Windows XP Pro SP3 FR)
  * AtomixMP3 < 2.3 - https://www.exploit-db.com/exploits/2873  (Windows XP Pro SP3 FR)
  * XMPlay 3.3.0.4- https://www.exploit-db.com/exploits/2824  (Windows XP Pro SP3 FR)
    * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/2815 - https://www.exploit-db.com/exploits/2821
  * CesarFTP 0.99g - https://www.exploit-db.com/exploits/1906  (Windows XP Pro SP3 FR)
  * Aviosoft Digital TV Player Professional 1.x - https://www.exploit-db.com/exploits/22932 (Windows XP Pro SP3 FR)
+   * There is a tutorial for exploiting this software in the [Exploiting Simple Buffer Overflows on Win32](https://www.pentesteracademy.com/course?id=13) (not free).
  * MicroP 0.1.1.1600 - https://www.exploit-db.com/exploits/14720 (Windows XP Pro SP3 FR)
+   * There is a tutorial for exploiting this software in the [Exploiting Simple Buffer Overflows on Win32](https://www.pentesteracademy.com/course?id=13) (not free).
 
 ### Small space - Write your shellcode
 
@@ -47,6 +57,7 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 ### Small space - Egghunter
 
  * Kolibri Web Server 2.0 - https://www.exploit-db.com/exploits/33027 (Windows XP Pro SP3 FR)
+    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/3.html).
  * Winamp 5.12 - https://www.exploit-db.com/exploits/3422
    * This one is tricky and have small space you can:
       * use a short homemade shellcode (Windows XP Pro SP3 FR),
@@ -72,6 +83,7 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
 ## Win32 Stack based buffer overflow with SEH
 
  * DVD X Player 5.5 Pro - https://www.exploit-db.com/exploits/17788 (Windows XP Pro SP3 FR)
+   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/3.html).
  * R 3.4.4 - https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
  
  ## Win32 Stack based buffer overflow - ASLR bypass
