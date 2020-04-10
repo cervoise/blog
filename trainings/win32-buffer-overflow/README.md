@@ -34,10 +34,11 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * freeSSHd 1.0.9 - https://www.exploit-db.com/exploits/1787  (Windows XP Pro SP3 FR)
    * There is a tutorial for exploiting this software in the [Exploiting Simple Buffer Overflows on Win32](https://www.pentesteracademy.com/course?id=13) (not free).
  * Easy RM to MP3 Converter 2.7.3.700 - https://www.exploit-db.com/exploits/10374 (Windows XP Pro SP3 FR)
+   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/6.html) for DEP bypass.
  * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
    * Similar vulnerability in the same program: https://www.exploit-db.com/exploits/17539
-   * DEP bypass exists: https://www.exploit-db.com/exploits/17886
-   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html).
+   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html)
+   * DEP bypass exists: https://www.exploit-db.com/exploits/17886 (Windows XP Pro SP3 FR)
  * Ollydbg 2.00 Beta1 - https://www.exploit-db.com/exploits/11465 (Windows XP Pro SP3 FR)
  * AtomixMP3 < 2.3 - https://www.exploit-db.com/exploits/2873  (Windows XP Pro SP3 FR)
  * XMPlay 3.3.0.4- https://www.exploit-db.com/exploits/2824  (Windows XP Pro SP3 FR)
@@ -85,6 +86,12 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * DVD X Player 5.5 Pro - https://www.exploit-db.com/exploits/17788 (Windows XP Pro SP3 FR)
    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/3.html).
  * R 3.4.4 - https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
+ 
+## Win32 Stack based buffer overflow - DEP bypass
+  * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
+   * Similar vulnerability in the same program: https://www.exploit-db.com/exploits/17539
+   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html)
+   * DEP bypass exists: https://www.exploit-db.com/exploits/17886 (Windows XP Pro SP3 FR)
  
  ## Win32 Stack based buffer overflow - ASLR bypass
  ### Non-ASLR enabled module (JMP ESP)
