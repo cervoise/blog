@@ -4,7 +4,7 @@ import socket
 import sys
 
 # Freefloat FTP Server 1.0
-# Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/40673
+# Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/23243
 # Exploit tested on Windows XP Pro SP3 FR
 # Note: others FTP commands are vulnerable to buffer overflow (https://www.exploit-db.com/search?q=freefloat)
 
