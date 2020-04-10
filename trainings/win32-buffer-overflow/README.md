@@ -89,9 +89,9 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  
 ## Win32 Stack based buffer overflow - DEP bypass
   * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
-   * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/17539, https://www.exploit-db.com/exploits/40673 (https://www.exploit-db.com/search?q=freefloat).
-   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html)
-   * DEP bypass exists: https://www.exploit-db.com/exploits/17886 (Windows XP Pro SP3 FR)
+    * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/17539, https://www.exploit-db.com/exploits/40673 (https://www.exploit-db.com/search?q=freefloat).
+    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html)
+    * DEP bypass exists: https://www.exploit-db.com/exploits/17886 (Windows XP Pro SP3 FR)
  
  ## Win32 Stack based buffer overflow - ASLR bypass
  ### Non-ASLR enabled module (JMP ESP)
