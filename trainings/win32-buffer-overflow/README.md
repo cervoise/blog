@@ -36,7 +36,7 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * Easy RM to MP3 Converter 2.7.3.700 - https://www.exploit-db.com/exploits/10374 (Windows XP Pro SP3 FR)
    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/6.html) for DEP bypass.
  * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
-   * Similar vulnerability in the same program: https://www.exploit-db.com/exploits/17539
+   * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/17539, https://www.exploit-db.com/exploits/40673 (https://www.exploit-db.com/search?q=freefloat).
    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html)
    * DEP bypass exists: https://www.exploit-db.com/exploits/17886 (Windows XP Pro SP3 FR)
  * Ollydbg 2.00 Beta1 - https://www.exploit-db.com/exploits/11465 (Windows XP Pro SP3 FR)
@@ -89,7 +89,7 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  
 ## Win32 Stack based buffer overflow - DEP bypass
   * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
-   * Similar vulnerability in the same program: https://www.exploit-db.com/exploits/17539
+   * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/17539, https://www.exploit-db.com/exploits/40673 (https://www.exploit-db.com/search?q=freefloat).
    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html)
    * DEP bypass exists: https://www.exploit-db.com/exploits/17886 (Windows XP Pro SP3 FR)
  
