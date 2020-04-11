@@ -118,3 +118,8 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
  ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
     * You can find a vulnerable IE version on Windows Vista NO SP
+
+## Win32 Stack based buffer overflow - DEP & ASLR bypass
+
+### SetProcessDEPPolicy
+  * WarFTP 1.65 - https://www.exploit-db.com/exploits/3570  (Windows XP Pro SP3 FR with WehnTrust 1.2)
