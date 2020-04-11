@@ -109,6 +109,7 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
  ## Win32 Stack based buffer overflow - ASLR bypass
  ### Non-ASLR enabled module (JMP ESP)
   * Socusoft Photo to Video Converter 8.07 - https://www.exploit-db.com/exploits/45406 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
+  * VUPlayer 2.44 - https://www.exploit-db.com/exploits/2870 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
   #### Tricky
    * Winamp 5.12 - https://www.exploit-db.com/exploits/3422 
    * This one is tricky and have small space you can:
