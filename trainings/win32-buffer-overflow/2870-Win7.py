@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 # VUPlayer 2.44
-# This is a short shellcode version (no egghunter)
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/2870
 # Exploit tested on Windows XP Pro SP3 FR / Windows 7 Pro SP1 EN 
 
