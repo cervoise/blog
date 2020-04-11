@@ -19,6 +19,13 @@ For "old" systems, you may have trouble to find old tools:
    * is not working on Windows 2000 (but you can check your DLL on another system)
   * WinDbg for Windows XP is available on the Waybackmachine: http://web.archive.org/web/20130118182453/https://msdl.microsoft.com/download/symbols/debuggers/dbg_x86_6.11.1.404.msi
 
+Sometimes you have a both ASLR & DEP bypass, but the binary is too old for Windows Vista or newer. You can use:
+  * EMET 4.1 (but you'll have to find it!)
+  * WehnTrust https://archive.codeplex.com/?p=wehntrust - In this case, you will have to :
+    * install it
+    * put an exception on your program
+The idea is to emulate Windows ALSR behaviour. This can also be used for ASLR bypasses, but most of the time it is just finding a JMP ESP in non ASLR module (I'll not cover this part with the following tools).
+ 
 These exercices are also a good opportunity to test Metasploit payloads ;)
 
 ## Simple Win32 stack based buffer overflow
@@ -88,10 +95,16 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * R 3.4.4 - https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
  
 ## Win32 Stack based buffer overflow - DEP bypass
+
+Note: Once you have your ROP chain bypass for a system, you can reuse it for many software.
+
+### SetProcessDEPPolicy
+
   * Freefloat FTP Server - https://www.exploit-db.com/exploits/23243 (Windows XP Pro SP3 FR)
     * Similar vulnerabilities in the same program: https://www.exploit-db.com/exploits/17539, https://www.exploit-db.com/exploits/40673 (https://www.exploit-db.com/search?q=freefloat).
     * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/2.html)
     * DEP bypass exists: https://www.exploit-db.com/exploits/17886 (Windows XP Pro SP3 FR)
+  * WarFTP 1.65 - https://www.exploit-db.com/exploits/3570  (Windows XP Pro SP3 FR)
  
  ## Win32 Stack based buffer overflow - ASLR bypass
  ### Non-ASLR enabled module (JMP ESP)
