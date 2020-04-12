@@ -116,6 +116,7 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
       * play with ESP to find more space (Windows XP Pro SP3 FR (no ASLR) / Windows 7 Pro SP1 EN).
  ### Non-ASLR enabled module with SEH
   * Boxoft WAV to MP3 Converter 1.1 - https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
+  * Allok Quicktime to AVI MPEG DVD Converter 4.6.1217 - https://www.exploit-db.com/exploits/44330 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
  ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
     * You can find a vulnerable IE version on Windows Vista NO SP
