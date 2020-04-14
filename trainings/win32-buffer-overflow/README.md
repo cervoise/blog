@@ -20,7 +20,8 @@ For "old" systems, you may have trouble to find old tools:
   * WinDbg for Windows XP is available on the Waybackmachine: http://web.archive.org/web/20130118182453/https://msdl.microsoft.com/download/symbols/debuggers/dbg_x86_6.11.1.404.msi
 
 Sometimes you have a both ASLR & DEP bypass, but the binary is too old for Windows Vista or newer. You can use:
-  * EMET 4.1 (but you'll have to find it!)
+  * EMET 4.1
+    * You can find it on the Waybackmachine: https://web.archive.org/web/20140114083043/http://www.microsoft.com/en-us/download/details.aspx?id=41138
   * WehnTrust https://archive.codeplex.com/?p=wehntrust - In this case, you will have to :
     * install it
     * put an exception on your program
