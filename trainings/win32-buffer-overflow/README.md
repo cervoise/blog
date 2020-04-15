@@ -117,7 +117,7 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
   * WarFTP 1.65 - https://www.exploit-db.com/exploits/3570  (Windows XP Pro SP3 FR)
  
  ## Win32 Stack based buffer overflow - ASLR bypass
- ### Non-ASLR enabled module (JMP ESP)
+ ### Non-ASLR enabled module (JMP ESP or equivalent)
   * Socusoft Photo to Video Converter 8.07 - https://www.exploit-db.com/exploits/45406 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
   * VUPlayer 2.44 - https://www.exploit-db.com/exploits/2870 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
   #### Tricky
@@ -128,6 +128,8 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
  ### Non-ASLR enabled module with SEH
   * Boxoft WAV to MP3 Converter 1.1 - https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
   * Allok Quicktime to AVI MPEG DVD Converter 4.6.1217 - https://www.exploit-db.com/exploits/44330 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
+  * DVD X Player 5.5 Pro - https://www.exploit-db.com/exploits/17788 (Windows 10.0.18363.778 Pro EN)
+  
  ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
     * You can find a vulnerable IE version on Windows Vista NO SP
