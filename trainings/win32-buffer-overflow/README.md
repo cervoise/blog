@@ -7,7 +7,16 @@ I recommend to start with these online ressources:
 
 I did not crawl all possibilty of https://www.exploit-db.com, same program may be vulnerable in different ways. I can refer to the same exploit for different cases.
 
-I do not consider that the Windows firewall is a security feature to be bypass for these exercices (but I may tell in the exploit file if it is possible to bypass it). I'm only focussing on exploitation prevention feature.  
+## About security features
+
+I am focusing on exploiting buffer overflows in order to gain code execution. If it is possible, I bypass some exploitation prevention such as ASLR or DEP. However, I am not digging in other security features bypass such as:
+  * Windows firewall (but I may tell in the exploit file if it is possible to bypass it)
+  * Antivirus bypass for the payload: pop a calc is enough
+  * Applocker bypass: finding a way to bypass Applocker or finding an authorized program is another job
+  
+Regarding features that can prevent again execution:
+  * ASLR is enable by default since Windows Vista.
+  * DEP is configure by default for only be enable on specific compiled programs or libraries. DEP bypass for a programm that is not compiled with DEP is done on a Windows with PAE enable, on DEP enable for all programs. 
 
 ## Notes
 
@@ -112,6 +121,7 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
   * Socusoft Photo to Video Converter 8.07 - https://www.exploit-db.com/exploits/45406 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
   * VUPlayer 2.44 - https://www.exploit-db.com/exploits/2870 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
   #### Tricky
+   * FTP Commander Pro 8.03 - https://www.exploit-db.com/exploits/47775
    * Winamp 5.12 - https://www.exploit-db.com/exploits/3422 
    * This one is tricky and have small space you can:
       * play with ESP to find more space (Windows XP Pro SP3 FR (no ASLR) / Windows 7 Pro SP1 EN).
