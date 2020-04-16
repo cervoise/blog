@@ -121,10 +121,10 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
   * Socusoft Photo to Video Converter 8.07 - https://www.exploit-db.com/exploits/45406 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
   * VUPlayer 2.44 - https://www.exploit-db.com/exploits/2870 (Windows 7 Pro SP1 EN, also work on Windows XP Pro SP3 FR (no ASLR))
   #### Tricky
-   * FTP Commander Pro 8.03 - https://www.exploit-db.com/exploits/47775
+   * FTP Commander Pro 8.03 - https://www.exploit-db.com/exploits/47775 (Windows 10.0.18363.778 Pro EN)
    * Winamp 5.12 - https://www.exploit-db.com/exploits/3422 
-   * This one is tricky and have small space you can:
-      * play with ESP to find more space (Windows XP Pro SP3 FR (no ASLR) / Windows 7 Pro SP1 EN).
+     * This one is tricky and have small space you can:
+       * play with ESP to find more space (Windows XP Pro SP3 FR (no ASLR) / Windows 7 Pro SP1 EN).
  ### Non-ASLR enabled module with SEH
   * Boxoft WAV to MP3 Converter 1.1 - https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
   * Allok Quicktime to AVI MPEG DVD Converter 4.6.1217 - https://www.exploit-db.com/exploits/44330 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
