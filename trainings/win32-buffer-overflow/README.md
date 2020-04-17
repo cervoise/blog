@@ -34,7 +34,7 @@ Sometimes you have a both ASLR & DEP bypass, but the binary is too old for Windo
   * WehnTrust https://archive.codeplex.com/?p=wehntrust - In this case, you will have to :
     * install it
     * put an exception on your program
-The idea is to emulate Windows ALSR behaviour. This can also be used for ASLR bypasses, but most of the time it is just finding a JMP ESP in non ASLR module (I'll not cover this part with the following tools).
+
  
 These exercices are also a good opportunity to test Metasploit payloads ;)
 
