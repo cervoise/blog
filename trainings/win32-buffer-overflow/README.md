@@ -137,7 +137,7 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
 
 ### Non-ASLR enabled module with SEH - Unicode
   * Triologic Media Player 8 - https://www.exploit-db.com/exploits/14673 (Windows 10.0.18363.778 Pro EN / Windows XP Pro SP3 FR (no ASLR))
-   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/5.html).
+    * There is a tutorial on [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/5.html).
 
  ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
