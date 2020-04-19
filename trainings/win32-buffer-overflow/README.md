@@ -103,6 +103,10 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
  * DVD X Player 5.5 Pro - https://www.exploit-db.com/exploits/17788 (Windows XP Pro SP3 FR)
    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/3.html).
  * R 3.4.4 - https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
+### 3-bytes overwrite with egghunter
+ * Nsauditor 3.0.28.0 - https://www.exploit-db.com/exploits/46005 (Windows XP Pro SP3 FR)
+  * This should bypass ASLR if the egghunter was working on newer Windows versions.
+
  
 ## Win32 Stack based buffer overflow - DEP bypass
 
@@ -124,12 +128,17 @@ Note: Once you have your ROP chain bypass for a system, you can reuse it for man
    * FTP Commander Pro 8.03 - https://www.exploit-db.com/exploits/47775 (Windows 10.0.18363.778 Pro EN)
    * Winamp 5.12 - https://www.exploit-db.com/exploits/3422 
      * This one is tricky and have small space you can:
-       * play with ESP to find more space (Windows XP Pro SP3 FR (no ASLR) / Windows 7 Pro SP1 EN).
+      * play with ESP to find more space (Windows XP Pro SP3 FR (no ASLR) / Windows 7 Pro SP1 EN).
  ### Non-ASLR enabled module with SEH
   * Boxoft WAV to MP3 Converter 1.1 - https://www.exploit-db.com/exploits/44971 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
   * Allok Quicktime to AVI MPEG DVD Converter 4.6.1217 - https://www.exploit-db.com/exploits/44330 (Windows 7 Pro SP1 EN / XP Pro SP3 FR (no ASLR))
   * DVD X Player 5.5 Pro - https://www.exploit-db.com/exploits/17788 (Windows 10.0.18363.778 Pro EN)
-  
+
+
+### Non-ASLR enabled module with SEH - Unicode
+  * Triologic Media Player 8 - https://www.exploit-db.com/exploits/14673 (Windows 10.0.18363.778 Pro EN / Windows XP Pro SP3 FR (no ASLR))
+   * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/5.html).
+
  ### Partial EIP overwrite
   * MS07-017 on Internet Explorer for Windows Vista - https://www.exploit-db.com/exploits/16526
     * You can find a vulnerable IE version on Windows Vista NO SP
