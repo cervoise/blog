@@ -31,7 +31,7 @@ For "old" systems, you may have trouble to find old tools:
 Sometimes you have a both ASLR & DEP bypass, but the binary is too old for Windows Vista or newer. You can use:
   * EMET 4.1
     * You can find it on the Waybackmachine: https://web.archive.org/web/20140114083043/http://www.microsoft.com/en-us/download/details.aspx?id=41138
-  * WehnTrust https://archive.codeplex.com/?p=wehntrust - In this case, you will have to :
+  * WehnTrust https://archive.codeplex.com/?p=wehntrust - In this case, you will have to:
     * install it
     * put an exception on your program
 
@@ -104,7 +104,7 @@ These exercices are also a good opportunity to test Metasploit payloads ;)
    * There is a tutorial in [fuzzysecurity](https://www.fuzzysecurity.com/tutorials/expDev/3.html).
  * R 3.4.4 - https://www.exploit-db.com/exploits/45289 (Windows XP Pro SP3 FR)
  
-### 3-bytes overwrite with egghunter
+### 3-bytes overwrite with egghunter
  * Nsauditor 3.0.28.0 - https://www.exploit-db.com/exploits/46005 (Windows XP Pro SP3 FR)
   * Nsauditor 3.2.1.0 is still vulnerable
   * This should bypass ASLR if the egghunter was working on newer Windows versions.
