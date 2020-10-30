@@ -7,6 +7,9 @@ I recommend to start with these online ressources:
 
 I did not crawl all possibilties of https://www.exploit-db.com, same program may be vulnerable in different ways. I can refer to the same exploit for different cases.
 
+You can check for specific blog post:
+  * https://www.offensive-security.com/vulndev/disarming-and-bypassing-emet-5-1/
+
 ## About security features
 
 I am focusing on exploiting buffer overflows in order to gain code execution. If it is possible, I bypass some exploitation prevention such as ASLR or DEP. However, I am not digging in other security features bypass such as:
